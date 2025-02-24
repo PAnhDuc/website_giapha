@@ -216,3 +216,62 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+/* TREE FLEX */
+
+.main_content {
+  background-color: var(--black2-color);
+  margin: 15px 15px;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+
+.main-content .tf-tree {
+  margin: 50px 50px;
+}
+
+.main_content .tf-nc {
+  font-size: 15px;
+  width: 258px;
+  padding: 20px 0px!important;
+}
+
+.tf-tree ul {
+  display: inline-flex
+;
+  margin: 50px;
+}
+
+.tf-tree .bg_fill {
+  background: url(../asset/img/bg-title-yellow.jpg);
+  background-size: 100% 100%;
+}
+
+.tf-tree .tf-nc:after, .tf-tree .tf-nc:before, .tf-tree .tf-node-content:after, .tf-tree .tf-node-content:before {
+  border-left: .0625em solid #7d5803!important;
+  content: "";
+  display: block;
+  height: 16px!important;
+  left: calc(50% - .03125em);
+  position: absolute;
+  width: .0625em;
+}
+
+.tf-tree li li:before {
+  border-top: .0625em solid #7d5803!important;
+  content: "";
+  display: block;
+  height: 1px!important;
+  left: -.03125em;
+  position: absolute;
+  top: -1.03125em;
+  width: 100%;
+}
+
+.tf-nc a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding: 20px 0px;
+}
