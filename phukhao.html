@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/asset/main.css" />
-  <title>WEBSITE PHẢ ĐỒ</title>
+  <title>Trang Phụ Khảo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -47,7 +47,7 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="#">
             <span class="icon"><i class="fa-solid fa-book-open-reader"></i></span>
             <span class="title">Ngoại phả</span>
           </a>
@@ -99,117 +99,53 @@
     </div>
     <!-- CODE HERE -->
     <div class="main_content">
-      <div class="tf-tree">
-        <ul>
-          <li>
-            <div class="tf-nc bg_fill">
-              <a href="">Nguyễn Văn AAA</a>
+        <div class="content_pk">
+            <div class="title-box">Phụ Khảo Phạm</div>
+            <div class="button-content_pk">
+                <div class="text-box" onclick="showSlide('dinhlang')">Đình Làng</div>
+                <div class="text-box" onclick="showSlide('tone')">Tổ Nghề</div>
             </div>
-            <ul>
-              <li>
-                <div class="tf-nc bg_fill">
-                  <a href="">Nguyễn Văn AAA</a>
+        </div>
+    
+        <!-- Overlay để tắt khi nhấn ra ngoài -->
+        <div class="slide-overlay" id="overlay" onclick="hideAllSlides()"></div>
+    
+        <!-- Slide giới thiệu Đình Làng -->
+        <div class="slide" id="dinhlang-slide">
+            <div class="slide-content">
+                <h1>Đình Làng</h1>
+                <p>Tùy hai dòng ngàn ngui trong Đại Việt sử lâu tồn thu, các nhà khảo cổ đã tìm ra hàng chục Lò Gạch (Thái
+                    Bình), giúp làm sáng tỏ biên sử tồn tại của mối cung điện ngoại vi kinh thành Thăng Long.</p>
+                <div class="images">
+                    <div class="image">
+                        <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Đình Làng">
+                    </div>
+                    <div class="image">
+                        <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                    </div>
                 </div>
-                <ul>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
+            </div>
+            <button class="close-btn" onclick="hideSlide('dinhlang')">X</button>
+        </div>
+    
+        <!-- Slide giới thiệu Tổ Nghề -->
+        <div class="slide" id="tone-slide">
+            <div class="slide-content">
+                <h1>Tổ Nghề</h1>
+                <p>Qua 3 đợt khai quật khảo cổ học, hàng chục Lò Gạch - một trong những hàng cung lớn của nhà Trần cho xây
+                    dựng trên đất phát tích Long Hưng, nay thuộc xã Đông Minh, huyện Hưng Hà, tỉnh Thái Bình đã được hé lộ.
+                </p>
+                <div class="images">
+                    <div class="image">
+                        <img src="https://via.placeholder.com/300x200?text=Tổ+Nghệ" alt="Tổ Nghề">
                     </div>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
+                    <div class="image">
+                        <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
                     </div>
-                    <ul>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A1</a>
-                        </div>
-                        <ul>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                            <ul>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A2</a>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A3</a>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A4</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <div class="tf-nc bg_fill">
-                  <a href="">Nguyễn Văn A</a>
                 </div>
-                <ul>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A111</a>
-                    </div>
-                    <li>
-                      <div class="tf-nc bg_fill">
-                        <a href="">Nguyễn Văn A</a>
-                      </div>
-                    </li>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('tone')">X</button>
+        </div>
     </div>
 
   </div>
