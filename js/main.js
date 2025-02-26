@@ -22,14 +22,6 @@ list.forEach((item) => {
     item.addEventListener("mouseover", activeLink);
 });
 
-// 
-document.addEventListener('DOMContentLoaded', function () {
-    const mainContent = document.querySelector('.main_content');
-    if (mainContent) {
-        mainContent.scrollTop = mainContent.scrollHeight; // Cuộn xuống dưới cùng khi trang được tải
-    }
-});
-
 
 // Hiển thị slide
 function showSlide(type) {
