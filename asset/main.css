@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @font-face {
   font-family: 'ong-do';
   src: url('./font/UTMOngDoGia.woff2') format('woff2'),
-      url('./font/UTMOngDoGia.woff') format('woff');
+    url('./font/UTMOngDoGia.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'ong-do2';
   src: url('./font/UTMIsadora.woff2') format('woff2'),
-      url('./font/UTMIsadora.woff') format('woff');
+    url('./font/UTMIsadora.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -21,6 +23,7 @@
   padding: 0;
   font-family: "Roboto", serif;
   box-sizing: border-box;
+  /* max-width: 100%; */
 }
 
 :root {
@@ -32,9 +35,30 @@
   --black2-color: #999;
 }
 
+/* Tương thích với Firefox (không hỗ trợ ẩn nút hoàn toàn qua CSS) */
+html {
+  scrollbar-width: none;
+  /* Thanh cuộn mỏng */
+}
+
+html, body {
+  overflow-x: scroll; /* Giữ chức năng cuộn */
+  -ms-overflow-style: none; /* IE và Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari và Opera */
+}
+
 body {
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari và Opera */
 }
 
 .container {
@@ -236,18 +260,14 @@ body {
 /* TREE FLEX */
 
 .main_content {
-  /* background-color: var(--black2-color); */
+  background-color: #f5e0a794;
+  border-radius: 20px;
   margin: 15px 15px;
   width: auto;
-  height: 685px;
-  overflow-y: auto;
+  height: 100vh;
   text-align: center;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .main_content::-webkit-scrollbar {
@@ -309,13 +329,13 @@ body {
 
 .content_pk {
   text-align: center;
-  background: #f5e0a7;
   padding: 25px;
   border-radius: 0;
   box-shadow: none;
   width: 100%;
   position: relative;
   z-index: 1;
+  height: 100vh;
 }
 
 .title-box {
@@ -608,9 +628,9 @@ body {
 
   .text-box {
     width: 100%;
-    font-size: 20px;
-    padding: 40px 30px;
-}
+    font-size: 25px;
+    padding: 50px 107px;
+  }
 
   .content_pk {
     padding: 25px;
@@ -622,7 +642,7 @@ body {
     padding: 40px;
     margin-bottom: 20px;
     width: 100%;
-}
+  }
 
   .title-box::before,
   .title-box::after {
@@ -640,5 +660,7 @@ body {
 
   .button-content_pk {
     gap: 15px;
+    display: grid;
+    grid-column: auto;
   }
 }
