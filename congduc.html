@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./asset/main.css" />
-  <title>WEBSITE PHẢ ĐỒ</title>
+  <title>Trang Công Đức </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -41,13 +41,13 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="phado.html">
             <span class="icon"><i class="fa-solid fa-network-wired sidebar_left--icon"></i></span>
             <span class="title">Quản lí phả đồ</span>
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="#">
             <span class="icon"><i class="fa-solid fa-book-open-reader"></i></span>
             <span class="title">Ngoại phả</span>
           </a>
@@ -59,19 +59,19 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="hinhanh.html">
             <span class="icon"><i class="fa-solid fa-images"></i></span>
             <span class="title">Hình ảnh</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="congduc.html">
             <span class="icon"><i class="fa-solid fa-toolbox"></i></span>
             <span class="title">Công đức</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="login.html">
             <span class="icon"><i class="fa-solid fa-right-to-bracket"></i></span>
             <span class="title">Đăng xuất tài khoản<nav></nav></span>
           </a>
@@ -98,124 +98,72 @@
       </div>
     </div>
     <!-- CODE HERE -->
-    <div class="main_content">
-      <div class="tf-tree">
-        <ul>
-          <li>
-            <div class="tf-nc bg_fill">
-              <a href="">Nguyễn Văn AAA</a>
+      <div class="main_content">
+        <div class="title-box">Công đức Nguyễn Kiên</div>
+        <div class="header">
+          </header>
+          <div class="content">
+            <a href="#popup" class="add-event-button">Thêm mới sự kiện quyên góp</a>
+            <h2>Danh sách sự kiện</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tên</th>
+                  <th>Mô tả</th>
+                  <th>Ngày</th>
+                  <th>Tổng tiền</th>
+                  <th>Danh sách</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Danh sách quyên góp khuyên học ngày 1/6/2023</td>
+                  <td></td>
+                  <td>01-06-2023</td>
+                  <td>15,140,000 đ</td>
+                  <td><a href="xemds.html">Xem danh sách</a></td>
+                </tr>
+                <tr class="alternate">
+                  <td>2</td>
+                  <td>Danh sách công đức hợp đồng ngày 20/03/2023</td>
+                  <td></td>
+                  <td>20-03-2023</td>
+                  <td>81,900,000 đ</td>
+                  <td><a href="xemds.html">Xem danh sách</a></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Danh sách công đức rằm tháng Giêng 2023</td>
+                  <td></td>
+                  <td>07-02-2023</td>
+                  <td>27,955,000 đ</td>
+                  <td><a href="xemds.html">Xem danh sách</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Popup (Modal) Thêm mới sự kiện quyên góp -->
+          <div class="modal" id="popup">
+            <div class="modal-content">
+              <h3>Tên sự kiện</h3>
+              <label>Tên sự kiện</label>
+              <input type="text" placeholder="Nhập tên sự kiện">
+              <label>Mô tả ngắn</label>
+              <input type="text" placeholder="Nhập mô tả ngắn">
+              <label>Ngày</label>
+              <input type="date">
+              <div class="modal-buttons">
+                <a href="#" class="close-button">Quay lại</a>
+                <button class="save-button">Lưu thông tin</button>
+              </div>
             </div>
-            <ul>
-              <li>
-                <div class="tf-nc bg_fill">
-                  <a href="">Nguyễn Văn AAA</a>
-                </div>
-                <ul>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                    <ul>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A1</a>
-                        </div>
-                        <ul>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                            <ul>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="tf-nc bg_fill">
-                                  <a href="">Nguyễn Văn AG</a>
-                                </div>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="tf-nc bg_fill">
-                              <a href="">Nguyễn Văn AF</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A2</a>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A3</a>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="tf-nc bg_fill">
-                          <a href="">Nguyễn Văn A4</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <div class="tf-nc bg_fill">
-                  <a href="">Nguyễn Văn A</a>
-                </div>
-                <ul>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A111</a>
-                    </div>
-                  <li>
-                    <div class="tf-nc bg_fill">
-                      <a href="">Nguyễn Văn A</a>
-                    </div>
-                  </li>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        </li>
-        </ul>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="popup-buttons">
-        <a href="index.html" class="popup-btn">Sign Up Page</a>
-        <a href="login.html" class="popup-btn">Login Page</a>
-        <a href="profile.html" class="popup-btn">Profile Page</a>
-    </div>
+  </div>
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
