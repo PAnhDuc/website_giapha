@@ -1120,7 +1120,7 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
 
 /* Đăng ảnh*/
 
-.title-box {
+/* .title-box {
   background-color: #fff3e6;
   border: 5px solid #8b6f47;
   padding: 10px;
@@ -1133,7 +1133,7 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
   color: #8b6f47;
   font-family: 'Brush Script MT', cursive;
   font-size: 36px;
-}
+} */
 
 .content h2 {
   color: #8b6f47;
