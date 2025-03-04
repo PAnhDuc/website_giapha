@@ -690,13 +690,6 @@ header {
   border-radius: 10px;
 }
 
-h1 {
-  font-family: 'Brush Script MT', cursive;
-  color: #8b6d2b;
-  font-size: 36px;
-  margin: 0;
-}
-
 .content {
   margin-top: 20px;
   background-color: #fff;
@@ -848,18 +841,6 @@ td a:hover {
 }
 
 /* khung cong duc */
-
-.content_pk {
-text-align: center;
-padding: 25px;
-border-radius: 0;
-box-shadow: none;
-width: 100%;
-position: relative;
-z-index: 1;
-height: 100vh;
-}
-
 .title-box {
 background: url(https://phanmemgiapha.vn/public/upload/theme/bg-title-yellow.jpg);
 background-size: 100% 100%;
