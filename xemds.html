@@ -10,7 +10,6 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
-
 </head>
 
 <body>
@@ -100,54 +99,69 @@
     <!-- CODE HERE -->
     <div class="main_content">
       <div class="content_pk">
-        <div class="title-box">Phụ Khảo Phạm</div>
-        <div class="button-content_pk">
-          <div class="text-box" onclick="showSlide('dinhlang')">Đình Làng</div>
-          <div class="text-box" onclick="showSlide('tone')">Tổ Nghề</div>
+        <div class="title-box">
+          Người đóng góp
         </div>
-      </div>
-
-      <!-- Overlay để tắt khi nhấn ra ngoài -->
-      <div class="slide-overlay" id="overlay" onclick="hideAllSlides()"></div>
-
-      <!-- Slide giới thiệu Đình Làng -->
-      <div class="slide" id="dinhlang-slide">
-        <div class="slide-content">
-          <h1>Đình Làng</h1>
-          <p>Tùy hai dòng ngàn ngui trong Đại Việt sử lâu tồn thu, các nhà khảo cổ đã tìm ra hàng chục Lò Gạch (Thái
-            Bình), giúp làm sáng tỏ biên sử tồn tại của mối cung điện ngoại vi kinh thành Thăng Long.</p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Đình Làng">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
-            </div>
+        <div class="content">
+          <h2>Danh sách đóng góp</h2>
+          <div class="buttons">
+            <button class="btn-back" onclick="goBack()">Quay lại</button>
+            <button class="btn-add">Thêm người công đức</button>
           </div>
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Con chúa cụ</th>
+                <th>Tiền mặt</th>
+                <th>Hiến vật</th>
+                <th>Tổng tiền</th>
+                <th>Ngày</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Trần Văn Hùng</td>
+                <td>phụ nữ</td>
+                <td>con của Yến</td>
+                <td>2.100.000 đ</td>
+                <td></td>
+                <td>2.100.000 đ</td>
+                <td>28-04-2021</td>
+              </tr>
+              <tr class="alternate">
+                <td>2</td>
+                <td>Nguyễn Thị Hào(Mi)</td>
+                <td>xóm 3</td>
+                <td></td>
+                <td>200.000 đ</td>
+                <td></td>
+                <td>200.000 đ</td>
+                <td>28-04-2021</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Cù Quán</td>
+                <td>xóm 5</td>
+                <td></td>
+                <td>1.000.000 đ</td>
+                <td></td>
+                <td>1.000.000 đ</td>
+                <td>28-04-2021</td>
+                <script>
+                  function goBack() {
+                    window.location.href = "index.html";
+                  }
+                </script>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <button class="close-btn" onclick="hideSlide('dinhlang')">X</button>
-      </div>
-
-      <!-- Slide giới thiệu Tổ Nghề -->
-      <div class="slide" id="tone-slide">
-        <div class="slide-content">
-          <h1>Tổ Nghề</h1>
-          <p>Qua 3 đợt khai quật khảo cổ học, hàng chục Lò Gạch - một trong những hàng cung lớn của nhà Trần cho xây
-            dựng trên đất phát tích Long Hưng, nay thuộc xã Đông Minh, huyện Hưng Hà, tỉnh Thái Bình đã được hé lộ.
-          </p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Tổ+Nghệ" alt="Tổ Nghề">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
-            </div>
-          </div>
-        </div>
-        <button class="close-btn" onclick="hideSlide('tone')">X</button>
       </div>
     </div>
-
   </div>
 
   <script src="./js/main.js"></script>

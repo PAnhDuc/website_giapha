@@ -646,7 +646,7 @@ body {
 
   .content_pk {
     padding: 25px;
-    height: 100vh;
+    max-height: 100vh;
   }
 
   .title-box {
@@ -675,4 +675,463 @@ body {
     display: grid;
     grid-column: auto;
   }
+}
+
+
+/* CÔNG ĐỨC */
+
+header {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #f5e7b0;
+  border: 5px solid #8b6d2b;
+  border-radius: 10px;
+}
+
+.content {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border: 5px solid #8b6d2b;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.content {
+  padding: 20px;
+  border: 2px dashed #8b6f47;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.add-event-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  float: left; /* Đặt nút bên trái */
+  text-decoration: none;
+  display: inline-block;
+}
+
+h2 {
+  color: #8b6d2b;
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  clear: both; /* Xóa float của nút để nội dung tiếp theo không bị ảnh hưởng */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #8b6d2b;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #8b6d2b;
+}
+
+th {
+  font-weight: bold;
+}
+
+tr.alternate {
+  background-color: #f8e8a2; /* Màu nền xen kẽ */
+}
+
+td a {
+  color: #ff4444;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+/* Popup (Modal) Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal:target {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #f5e7b0;
+  padding: 20px;
+  border: 5px solid #8b6d2b;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: left;
+  position: relative;
+}
+
+.modal-content h3 {
+  font-size: 20px;
+  color: #8b6d2b;
+  margin-top: 0;
+}
+
+.modal-content label {
+  display: block;
+  margin: 15px 0 5px;
+  color: #333;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal-content input[type="date"] {
+  padding: 10px;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.modal-buttons a, .modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.close-button {
+  background-color: #333;
+  color: white;
+}
+
+.save-button {
+  background-color: #4682b4;
+  color: white;
+}
+
+/* HÌNH ẢNH*/
+
+.add-btn {
+  background-color: var(--highlight-red); /* Màu đỏ cho nút Thêm mới */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  background-color: var(--highlight-green);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 20px;
+}
+
+.gallery-item {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .header h1 {
+    font-size: 22px; /* Giảm kích thước tiêu đề trên tablet */
+  }
+
+  .add-btn {
+    padding: 8px 18px; /* Giảm padding nút trên tablet */
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center; /* Trên mobile, căn giữa tất cả */
+  }
+
+  .header h1 {
+    flex-grow: 0; /* Trên mobile, không mở rộng tiêu đề */
+    text-align: center; /* Đảm bảo tiêu đề được căn giữa trên mobile */
+  }
+
+  .add-btn {
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng trên mobile */
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-item img {
+    height: 200px; /* Điều chỉnh chiều cao ảnh trên mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 18px; /* Giảm kích thước tiêu đề trên điện thoại nhỏ */
+  }
+
+  .add-btn {
+    padding: 6px 12px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr; /* Một cột trên màn hình rất nhỏ */
+  }
+
+  .gallery-item img {
+    height: 150px; /* Giảm chiều cao ảnh trên điện thoại nhỏ */
+  }
+
+  .gallery-item {
+    margin-bottom: 10px; /* Thêm khoảng cách giữa các hình trên mobile */
+  }
+}
+
+
+/* Danh sách thành viên công đức*/
+
+.back-btn {
+  background-color: var(--primary-brown);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background-color: var(--highlight-green);
+}
+
+.add-member-btn {
+  background-color: var(--highlight-red); /* Màu đỏ cho nút Thêm người công đức */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-member-btn:hover {
+  background-color: var(--highlight-green);
+}
+
+.event-list {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-list h2 {
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: var(--primary-brown);
+  color: white;
+  font-weight: bold;
+}
+
+tr.even-row {
+  background-color: #f9f1e0; /* Màu nhạt hơn cho hàng chẵn */
+}
+
+td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến vật */
+  color: var(--text-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center; /* Trên mobile, căn giữa tất cả */
+  }
+
+  .header h1 {
+    flex-grow: 0; /* Trên mobile, không mở rộng tiêu đề */
+    text-align: center; /* Đảm bảo tiêu đề được căn giữa trên mobile */
+  }
+
+  .back-btn, .add-member-btn {
+    width: 100%; /* Nút chiếm toàn bộ chiều rộng trên mobile */
+  }
+
+  .event-list {
+    width: 100%;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  .back-btn, .add-member-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .event-list h2 {
+    font-size: 18px;
+  }
+
+  .back-btn, .add-member-btn {
+    padding: 6px 12px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+}
+
+/* Đăng ảnh*/
+
+.content h2 {
+  color: #8b6f47;
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 2px solid #8b6f47;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #8b6f47;
+}
+
+.file-label span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.drag-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.album-input input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #8b6f47;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.back-btn, .upload-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.back-btn {
+  background-color: #000;
+  color: #fff;
+}
+
+.upload-btn {
+  background-color: #007bff;
+  color: #fff;
 }

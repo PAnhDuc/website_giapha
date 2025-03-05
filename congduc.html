@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./asset/main.css" />
-  <title>Trang Phụ Khảo</title>
+  <title>Trang Công Đức </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -100,56 +100,70 @@
     <!-- CODE HERE -->
     <div class="main_content">
       <div class="content_pk">
-        <div class="title-box">Phụ Khảo Phạm</div>
-        <div class="button-content_pk">
-          <div class="text-box" onclick="showSlide('dinhlang')">Đình Làng</div>
-          <div class="text-box" onclick="showSlide('tone')">Tổ Nghề</div>
+        <div class="title-box">Công đức Nguyễn Kiên</div>
+      <div class="header">
+        <div class="content">
+          <a href="#popup" class="add-event-button">Thêm mới sự kiện quyên góp</a>
+          <h2>Danh sách sự kiện</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Mô tả</th>
+                <th>Ngày</th>
+                <th>Tổng tiền</th>
+                <th>Danh sách</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Danh sách quyên góp khuyên học ngày 1/6/2023</td>
+                <td></td>
+                <td>01-06-2023</td>
+                <td>15,140,000 đ</td>
+                <td><a href="xemds.html">Xem danh sách</a></td>
+              </tr>
+              <tr class="alternate">
+                <td>2</td>
+                <td>Danh sách công đức hợp đồng ngày 20/03/2023</td>
+                <td></td>
+                <td>20-03-2023</td>
+                <td>81,900,000 đ</td>
+                <td><a href="xemds.html">Xem danh sách</a></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Danh sách công đức rằm tháng Giêng 2023</td>
+                <td></td>
+                <td>07-02-2023</td>
+                <td>27,955,000 đ</td>
+                <td><a href="xemds.html">Xem danh sách</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-
-      <!-- Overlay để tắt khi nhấn ra ngoài -->
-      <div class="slide-overlay" id="overlay" onclick="hideAllSlides()"></div>
-
-      <!-- Slide giới thiệu Đình Làng -->
-      <div class="slide" id="dinhlang-slide">
-        <div class="slide-content">
-          <h1>Đình Làng</h1>
-          <p>Tùy hai dòng ngàn ngui trong Đại Việt sử lâu tồn thu, các nhà khảo cổ đã tìm ra hàng chục Lò Gạch (Thái
-            Bình), giúp làm sáng tỏ biên sử tồn tại của mối cung điện ngoại vi kinh thành Thăng Long.</p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Đình Làng">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+        <!-- Popup (Modal) Thêm mới sự kiện quyên góp -->
+        <div class="modal" id="popup">
+          <div class="modal-content">
+            <h3>Tên sự kiện</h3>
+            <label>Tên sự kiện</label>
+            <input type="text" placeholder="Nhập tên sự kiện">
+            <label>Mô tả ngắn</label>
+            <input type="text" placeholder="Nhập mô tả ngắn">
+            <label>Ngày</label>
+            <input type="date">
+            <div class="modal-buttons">
+              <a href="#" class="close-button">Quay lại</a>
+              <button class="save-button">Lưu thông tin</button>
             </div>
           </div>
         </div>
-        <button class="close-btn" onclick="hideSlide('dinhlang')">X</button>
       </div>
-
-      <!-- Slide giới thiệu Tổ Nghề -->
-      <div class="slide" id="tone-slide">
-        <div class="slide-content">
-          <h1>Tổ Nghề</h1>
-          <p>Qua 3 đợt khai quật khảo cổ học, hàng chục Lò Gạch - một trong những hàng cung lớn của nhà Trần cho xây
-            dựng trên đất phát tích Long Hưng, nay thuộc xã Đông Minh, huyện Hưng Hà, tỉnh Thái Bình đã được hé lộ.
-          </p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Tổ+Nghệ" alt="Tổ Nghề">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
-            </div>
-          </div>
-        </div>
-        <button class="close-btn" onclick="hideSlide('tone')">X</button>
       </div>
     </div>
-
   </div>
-
   <script src="./js/main.js"></script>
 </body>
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./asset/main.css" />
-  <title>Trang Phụ Khảo</title>
+  <title>Trang Hình Ảnh</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -100,53 +100,50 @@
     <!-- CODE HERE -->
     <div class="main_content">
       <div class="content_pk">
-        <div class="title-box">Phụ Khảo Phạm</div>
-        <div class="button-content_pk">
-          <div class="text-box" onclick="showSlide('dinhlang')">Đình Làng</div>
-          <div class="text-box" onclick="showSlide('tone')">Tổ Nghề</div>
+        <div class="title-box">
+          Thư viện Nguyễn Kiên
         </div>
-      </div>
-
-      <!-- Overlay để tắt khi nhấn ra ngoài -->
-      <div class="slide-overlay" id="overlay" onclick="hideAllSlides()"></div>
-
-      <!-- Slide giới thiệu Đình Làng -->
-      <div class="slide" id="dinhlang-slide">
-        <div class="slide-content">
-          <h1>Đình Làng</h1>
-          <p>Tùy hai dòng ngàn ngui trong Đại Việt sử lâu tồn thu, các nhà khảo cổ đã tìm ra hàng chục Lò Gạch (Thái
-            Bình), giúp làm sáng tỏ biên sử tồn tại của mối cung điện ngoại vi kinh thành Thăng Long.</p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Đình Làng">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
-            </div>
+        <br>
+        <a href="danganh.html" class="add-btn">Thêm mới</a>
+        <div class="gallery">
+          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok.jpg" alt="Hình 1">
+          </div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/nha-tho-toc-tran-2_1635345530-1.jpg" alt="Hình 2">
+          </div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/1462785038_nha-tho-toc-tran-4-2.jpg" alt="Hình 3">
+          </div>
+          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/word-image-1715-1-2.jpeg"
+              alt="Hình 4"></div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/di-tich-lich-su-nha-tran-ivivu-1-2.jpg" alt="Hình 5">
+          </div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/co-cong-lon-trong-trieu-dai-nha-tran-la-ai-1-2.jpg"
+              alt="Hình 6"></div>
+          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/tran_500-2.jpg"
+              alt="Hình 7">
+          </div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/11-1650024488597-1650024492271442437571-1.jpg"
+              alt="Hình 8"></div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/ongvuathiensuvietnamtranthaitongtrancanh143230-d6e395e6-0711-2.jpg"
+              alt="Hình 9"></div>
+          <div class="gallery-item"><img
+              src="https://phanmemgiapha.vn/public/images/file/1/ai-khong-mang-ho-tran-nhung-lam-vua-nha-tran-4-1.jpg"
+              alt="Hình 10"></div>
+          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok-2.jpg"
+              alt="Hình 11">
+          </div>
+          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok-2.jpg"
+              alt="Hình 12">
           </div>
         </div>
-        <button class="close-btn" onclick="hideSlide('dinhlang')">X</button>
-      </div>
-
-      <!-- Slide giới thiệu Tổ Nghề -->
-      <div class="slide" id="tone-slide">
-        <div class="slide-content">
-          <h1>Tổ Nghề</h1>
-          <p>Qua 3 đợt khai quật khảo cổ học, hàng chục Lò Gạch - một trong những hàng cung lớn của nhà Trần cho xây
-            dựng trên đất phát tích Long Hưng, nay thuộc xã Đông Minh, huyện Hưng Hà, tỉnh Thái Bình đã được hé lộ.
-          </p>
-          <div class="images">
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Tổ+Nghệ" alt="Tổ Nghề">
-            </div>
-            <div class="image">
-              <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
-            </div>
-          </div>
-        </div>
-        <button class="close-btn" onclick="hideSlide('tone')">X</button>
       </div>
     </div>
+  </div>
 
   </div>
 
