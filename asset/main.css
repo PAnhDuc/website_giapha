@@ -339,13 +339,11 @@ body {
 
 .content_pk {
   text-align: center;
-  padding: 25px;
   border-radius: 0;
   box-shadow: none;
   width: 100%;
   position: relative;
   z-index: 1;
-  /* height: 100vh; */
 }
 
 .title-box {
