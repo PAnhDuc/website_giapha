@@ -344,6 +344,7 @@ body {
   width: 100%;
   position: relative;
   z-index: 1;
+  padding: 0px 20px;
 }
 
 .title-box {
@@ -351,7 +352,7 @@ body {
   background-size: 100% 100%;
   padding: 75px;
   font-family: 'ong-do';
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   display: inline-block;
   border-radius: 0;
   font-size: 70px;
@@ -535,6 +536,13 @@ body {
 }
 
 /* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .blog {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
 @media (max-width: 991px) {
   .navigation.active {
     width: 300px;
@@ -544,6 +552,10 @@ body {
   .main {
     width: 100%;
     left: 0;
+  }
+
+  .search-bar {
+    display: none !important;
   }
 }
 
@@ -675,6 +687,14 @@ body {
     display: grid;
     grid-column: auto;
   }
+
+  .search-bar {
+    display: none !important;
+  }
+
+  .blog {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -713,7 +733,8 @@ header {
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 20px;
-  float: left; /* Đặt nút bên trái */
+  float: left;
+  /* Đặt nút bên trái */
   text-decoration: none;
   display: inline-block;
 }
@@ -721,8 +742,9 @@ header {
 h2 {
   color: #8b6d2b;
   font-size: 24px;
-  margin: 0 0 20px 0;
-  clear: both; /* Xóa float của nút để nội dung tiếp theo không bị ảnh hưởng */
+  margin: 20px 0;
+  clear: both;
+  /* Xóa float của nút để nội dung tiếp theo không bị ảnh hưởng */
 }
 
 table {
@@ -736,7 +758,8 @@ thead {
   color: white;
 }
 
-th, td {
+th,
+td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #8b6d2b;
@@ -747,7 +770,8 @@ th {
 }
 
 tr.alternate {
-  background-color: #f8e8a2; /* Màu nền xen kẽ */
+  background-color: #f8e8a2;
+  /* Màu nền xen kẽ */
 }
 
 td a {
@@ -767,7 +791,8 @@ td a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Nền mờ */
   z-index: 1000;
   justify-content: center;
   align-items: center;
@@ -817,7 +842,8 @@ td a:hover {
   text-align: right;
 }
 
-.modal-buttons a, .modal-buttons button {
+.modal-buttons a,
+.modal-buttons button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -841,7 +867,8 @@ td a:hover {
 /* HÌNH ẢNH*/
 
 .add-btn {
-  background-color: var(--highlight-red); /* Màu đỏ cho nút Thêm mới */
+  background-color: var(--highlight-red);
+  /* Màu đỏ cho nút Thêm mới */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -872,7 +899,8 @@ td a:hover {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+  object-fit: cover;
+  /* Đảm bảo hình ảnh không bị méo */
 }
 
 /* Responsive Design */
@@ -882,11 +910,13 @@ td a:hover {
   }
 
   .header h1 {
-    font-size: 22px; /* Giảm kích thước tiêu đề trên tablet */
+    font-size: 22px;
+    /* Giảm kích thước tiêu đề trên tablet */
   }
 
   .add-btn {
-    padding: 8px 18px; /* Giảm padding nút trên tablet */
+    padding: 8px 18px;
+    /* Giảm padding nút trên tablet */
     font-size: 13px;
   }
 }
@@ -895,16 +925,20 @@ td a:hover {
   .header {
     flex-direction: column;
     gap: 10px;
-    justify-content: center; /* Trên mobile, căn giữa tất cả */
+    justify-content: center;
+    /* Trên mobile, căn giữa tất cả */
   }
 
   .header h1 {
-    flex-grow: 0; /* Trên mobile, không mở rộng tiêu đề */
-    text-align: center; /* Đảm bảo tiêu đề được căn giữa trên mobile */
+    flex-grow: 0;
+    /* Trên mobile, không mở rộng tiêu đề */
+    text-align: center;
+    /* Đảm bảo tiêu đề được căn giữa trên mobile */
   }
 
   .add-btn {
-    width: 100%; /* Nút chiếm toàn bộ chiều rộng trên mobile */
+    width: 100%;
+    /* Nút chiếm toàn bộ chiều rộng trên mobile */
     padding: 8px 16px;
     font-size: 12px;
   }
@@ -914,13 +948,21 @@ td a:hover {
   }
 
   .gallery-item img {
-    height: 200px; /* Điều chỉnh chiều cao ảnh trên mobile */
+    height: 200px;
+    /* Điều chỉnh chiều cao ảnh trên mobile */
+  }
+
+  .search-bar button {
+    width: 350px !important;
+    max-width: 350px !important;
+    font-size: 15px;
   }
 }
 
 @media (max-width: 480px) {
   .header h1 {
-    font-size: 18px; /* Giảm kích thước tiêu đề trên điện thoại nhỏ */
+    font-size: 18px;
+    /* Giảm kích thước tiêu đề trên điện thoại nhỏ */
   }
 
   .add-btn {
@@ -928,15 +970,18 @@ td a:hover {
   }
 
   .gallery {
-    grid-template-columns: 1fr; /* Một cột trên màn hình rất nhỏ */
+    grid-template-columns: 1fr;
+    /* Một cột trên màn hình rất nhỏ */
   }
 
   .gallery-item img {
-    height: 150px; /* Giảm chiều cao ảnh trên điện thoại nhỏ */
+    height: 150px;
+    /* Giảm chiều cao ảnh trên điện thoại nhỏ */
   }
 
   .gallery-item {
-    margin-bottom: 10px; /* Thêm khoảng cách giữa các hình trên mobile */
+    margin-bottom: 10px;
+    /* Thêm khoảng cách giữa các hình trên mobile */
   }
 }
 
@@ -958,7 +1003,8 @@ td a:hover {
 }
 
 .add-member-btn {
-  background-color: var(--highlight-red); /* Màu đỏ cho nút Thêm người công đức */
+  background-color: var(--highlight-red);
+  /* Màu đỏ cho nút Thêm người công đức */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -989,7 +1035,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
@@ -1002,10 +1049,13 @@ th {
 }
 
 tr.even-row {
-  background-color: #f9f1e0; /* Màu nhạt hơn cho hàng chẵn */
+  background-color: #f9f1e0;
+  /* Màu nhạt hơn cho hàng chẵn */
 }
 
-td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến vật */
+td:nth-child(5),
+td:nth-child(6) {
+  /* Định dạng tiền mặt và hiến vật */
   color: var(--text-dark);
 }
 
@@ -1014,16 +1064,21 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
   .header {
     flex-direction: column;
     gap: 10px;
-    justify-content: center; /* Trên mobile, căn giữa tất cả */
+    justify-content: center;
+    /* Trên mobile, căn giữa tất cả */
   }
 
   .header h1 {
-    flex-grow: 0; /* Trên mobile, không mở rộng tiêu đề */
-    text-align: center; /* Đảm bảo tiêu đề được căn giữa trên mobile */
+    flex-grow: 0;
+    /* Trên mobile, không mở rộng tiêu đề */
+    text-align: center;
+    /* Đảm bảo tiêu đề được căn giữa trên mobile */
   }
 
-  .back-btn, .add-member-btn {
-    width: 100%; /* Nút chiếm toàn bộ chiều rộng trên mobile */
+  .back-btn,
+  .add-member-btn {
+    width: 100%;
+    /* Nút chiếm toàn bộ chiều rộng trên mobile */
   }
 
   .event-list {
@@ -1034,11 +1089,13 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
     font-size: 14px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 8px;
   }
 
-  .back-btn, .add-member-btn {
+  .back-btn,
+  .add-member-btn {
     padding: 8px 16px;
     font-size: 12px;
   }
@@ -1053,7 +1110,8 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
     font-size: 18px;
   }
 
-  .back-btn, .add-member-btn {
+  .back-btn,
+  .add-member-btn {
     padding: 6px 12px;
   }
 
@@ -1061,7 +1119,8 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
     font-size: 12px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 6px;
   }
 }
@@ -1117,7 +1176,8 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
   text-align: center;
 }
 
-.back-btn, .upload-btn {
+.back-btn,
+.upload-btn {
   padding: 10px 20px;
   margin: 0 10px;
   border: none;
@@ -1134,4 +1194,359 @@ td:nth-child(5), td:nth-child(6) { /* Định dạng tiền mặt và hiến v�
 .upload-btn {
   background-color: #007bff;
   color: #fff;
+}
+
+/* PHA HE PAGE */
+header {
+  text-align: center;
+  padding: 15px;
+  background-color: #d4a017;
+  /* Màu vàng đậm cho tiêu đề */
+  border: 5px solid #8b4513;
+  /* Viền nâu đậm giống khung trong hình */
+  border-radius: 0;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2.8em;
+  /* Kích thước lớn hơn, giống hình */
+  font-weight: bold;
+  text-shadow: none;
+  position: relative;
+  z-index: 2;
+}
+
+/* Bỏ viền trang trí vì hình có khung đơn giản hơn */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 5px solid #8b4513;
+  z-index: 1;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 20px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar select {
+  padding: 0px 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 34px;
+  /* Chiều cao giống trong hình */
+  appearance: none;
+  /* Loại bỏ kiểu mặc định của dropdown */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"%3E%3Cpath d="M2 4l4 4 4-4H2z" fill="%238b4513"/%3E%3C/svg%3E');
+  /* Mũi tên dropdown */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-color: #fff;
+  cursor: pointer;
+  width: 150px;
+}
+
+.search-bar select:focus {
+  outline: none;
+  border-color: #d4a017;
+  /* Đường viền vàng khi focus */
+  box-shadow: 0 0 5px rgba(212, 160, 23, 0.3);
+}
+
+.search-bar button {
+  background-color: #d4a017;
+  /* Màu vàng đậm, giống nút trong hình */
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 10px 30px;
+  font-weight: bold;
+  border-radius: 7px;
+  max-width: 200px;
+  width: auto;
+}
+
+.search-bar button:hover {
+  background-color: #b8860b;
+}
+
+.table-container {
+  margin: 15px 0;
+  width: 100%;
+  overflow-x: auto;
+    max-height: 500px;
+}
+
+.table-container h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+th {
+  background-color: #8b4513;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #faf0e6;
+}
+
+.btn {
+  padding: 10px;
+  border: 0;
+  font-size: 12px;
+  line-height: 15px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 500;
+}
+
+
+.btn {
+  padding: 10px;
+  border: 0;
+  font-size: 12px;
+  line-height: 15px;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 500;
+}
+
+.update {
+  background-color: #4CAF50;
+}
+
+/* Xanh lá */
+.info {
+  background-color: #ffca28;
+}
+
+/* Vàng */
+.edit {
+  background-color: #ff9800;
+}
+
+/* Cam */
+.delete {
+  background-color: #f44336;
+}
+
+/* Đỏ */
+
+.update:hover {
+  background-color: #45a049;
+  cursor: pointer;
+}
+
+.info:hover {
+  cursor: pointer;
+  background-color: #f57c00;
+}
+
+.edit:hover {
+  cursor: pointer;
+  background-color: #f57c00;
+}
+
+.delete:hover {
+  cursor: pointer;
+  background-color: #da190b;
+}
+
+.buttons {
+  margin: 15px 0;
+  text-align: right;
+}
+
+.buttons button {
+  padding: 8px 18px;
+  margin-left: 8px;
+  background-color: #d4a017;
+  /* Màu vàng đậm, giống nút trong hình */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.buttons button:hover {
+  background-color: #b8860b;
+}
+
+/* Màn hình lớn hơn 1200px (desktop): Giữ nguyên bố cục */
+@media (max-width: 1200px) {
+  .table-container table {
+    font-size: 13px;
+  }
+
+  th,
+  td {
+    padding: 8px 10px;
+  }
+
+  .btn {
+    padding: 8px;
+    font-size: 11px;
+  }
+}
+
+/* Màn hình vừa (tablet, dưới 991px): Thu nhỏ và thêm cuộn ngang nếu cần */
+@media (max-width: 991px) {
+  .table-container {
+    overflow-x: auto;
+    /* Cho phép cuộn ngang */
+    -webkit-overflow-scrolling: touch;
+    /* Cuộn mượt trên iOS */
+  }
+
+  .table-container table {
+    min-width: 700px;
+    /* Đảm bảo bảng có chiều rộng tối thiểu */
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 6px 8px;
+  }
+
+  .btn {
+    padding: 6px;
+    font-size: 10px;
+  }
+}
+
+/* Màn hình nhỏ (điện thoại, dưới 768px): Tối ưu hóa thêm */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    max-height: 635px;
+  }
+
+  .table-container table {
+    min-width: 600px;
+    /* Giảm chiều rộng tối thiểu */
+    font-size: 11px;
+  }
+
+  th,
+  td {
+    padding: 5px 6px;
+  }
+
+  .btn {
+    padding: 4px;
+    font-size: 9px;
+    display: block;
+    width: 100%;
+    margin: 7px 0;
+  }
+
+  .table-container h2 {
+    font-size: 1.2em;
+  }
+}
+
+/* Màn hình rất nhỏ (dưới 480px): Chuyển sang bố cục xếp chồng (stacked) nếu cần */
+@media (max-width: 480px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .table-container table {
+    min-width: 500px;
+    font-size: 10px;
+  }
+
+  th,
+  td {
+    padding: 4px 5px;
+  }
+
+  .btn {
+    padding: 3px;
+    font-size: 8px;
+  }
+
+  .blog-item a {
+    height: 70px!important;
+    font-size: 25px!important;
+}
+}
+
+/* NGOAI PHA PAGE */
+
+.blog {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  max-height: 650px;
+    overflow-x: auto;
+}
+
+.blog-item {
+  background-color: #fff3e0;
+  border: 1px solid #8b6f47;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  padding: 12px;
+}
+
+.blog-item img {
+  width: 100%;
+  height: auto;
+}
+
+.blog-item a {
+  display: inline-block;
+  text-decoration: none;
+  height: 55px;
+  margin-top: 25px;
+  color: #8b6f47;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.blog-item a:hover {
+  color: #0a58ca;
 }
