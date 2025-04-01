@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Đăng Nhập</title>
+    <title>Trang Người Dùng</title>
     <link rel="stylesheet" href="./asset/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
 </head>
+
 <body>
-    <div class="form">
-        <div class="form-main">
-            <h2 class="form-heading">
-                Login
-            </h2>
-            <div class="form-group">
-                <p class="username">Username:</p>
-                <input type="text" name="name" id="name">
+    <div class="form profile-box">
+        <div class="form-main column">
+            <div class="profile-top">
+                <img src="https://picsum.photos/150" alt="Profile Image" class="profile-img">
+                <h2 class="profile-heading">Ducccc</h2>
+                <p class="profile-mail">paduc3257@gmail.com</p>
             </div>
-            <div class="form-group">
-                <p class="password">Password:</p>
-                <input type="password" name="pass" id="pass">
+            <div class="profile-bottom">
+                <h2 class="profile-heading">About</h2>
+                <p class="profile-desc">I'm Duc</p>
             </div>
-            <a class="btn-login" href="phado.html">Log In</a>
-            <p class="login-desc">Login with a social media account</p>
-            <div class="icon-group">
-                <i class="icon icon-facebook fa-brands fa-facebook"></i>
-                <i class="icon icon-twitter fa-brands fa-twitter"></i>
-                <i class="icon icon-instagram fa-brands fa-instagram"></i>
+        </div>
+
+        <div class="form-main column">
+            <div class="profile-top">
+                <h2 class="profile-heading">Personal Details</h2>
+                <div class="profile-left">
+                    <div class="form-group">
+                        <p class="username">Full Name:</p>
+                        <input type="text" name="fullName" id="fullName" class="profile-input">
+                    </div>
+                    <div class="form-group">
+                        <p class="username">Email:</p>
+                        <input type="text" name="email" id="email" class="profile-input">
+                    </div>
+                    <div class="form-group">
+                        <p class="username">Phone:</p>
+                        <input type="text" name="phone" id="phone" class="profile-input">
+                    </div>
+                    <div class="form-group">
+                        <p class="username">Password:</p>
+                        <input type="password" name="password" id="password" class="profile-input">
+                    </div>
+                </div>
+            </div>
+            <div class="profile-bottom">
+                <a class="btn btn-cancel" href="login.html">Cancel</a>
+                <a class="btn btn-update" href="#">Update</a>
             </div>
         </div>
     </div>
@@ -36,5 +63,74 @@
         <a href="login.html" class="popup-btn">Login Page</a>
         <a href="profile.html" class="popup-btn">Profile Page</a>
     </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtOEfRZNereDDI5o5ivTkI9Ht_RAHex0U",
+            authDomain: "test-web-f5a0a.firebaseapp.com",
+            databaseURL: "https://test-web-f5a0a-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "test-web-f5a0a",
+            storageBucket: "test-web-f5a0a.firebasestorage.app",
+            messagingSenderId: "230169455517",
+            appId: "1:230169455517:web:a21536928823eb1d105d74",
+            measurementId: "G-892G3PZS52"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const auth = firebase.auth();
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const uid = user.uid;
+                const userRef = database.ref('users/' + uid);
+
+                userRef.once('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        document.getElementById('fullName').value = data.fullName || '';
+                        document.getElementById('email').value = data.email || user.email || '';
+                        document.getElementById('phone').value = data.phone || '';
+                    }
+                });
+
+                document.querySelector('.btn-update').addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const fullName = document.getElementById('fullName').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const password = document.getElementById('password').value;
+
+                    const updatedData = {
+                        fullName: fullName,
+                        email: email,
+                        phone: phone
+                    };
+
+                    userRef.update(updatedData)
+                        .then(() => {
+                            alert('Cập nhật thông tin thành công!');
+                        })
+                        .catch((error) => {
+                            alert('Lỗi: ' + error.message);
+                        });
+
+                    if (password) {
+                        user.updatePassword(password)
+                            .then(() => {
+                                alert('Cập nhật mật khẩu thành công!');
+                            })
+                            .catch((error) => {
+                                alert('Lỗi khi cập nhật mật khẩu: ' + error.message);
+                            });
+                    }
+                });
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
+
 </html>
