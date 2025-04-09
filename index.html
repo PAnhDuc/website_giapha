@@ -2,49 +2,74 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./asset/css/login.css" />
-  <title></title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="./asset/css/login.css">
 </head>
 
 <body>
-  <div class="form">
-    <div class="form-main">
-      <h2 class="form-heading">
-        Signup
-      </h2>
-      <div class="form-group">
-        <p class="username">Username:</p>
-        <input type="text" name="name" id="name">
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Đăng Nhập</header>
+      <form action="#">
+        <p class="text-input">Gmail:</p>
+        <input type="text" id='inUsr' placeholder="Nhập gmail của bạn" required>
+        <p class="text-input">Mật khẩu:</p>
+        <input type="password" id="inPass" placeholder="Nhập mật khẩu" required>
+        <div class="signup">
+          <a href="#" id="forgotLabel">Quên mật khẩu?</a>
+        </div>
+        <input type="button" class="button btn btn-login" value="Login">
+      </form>
+      <div class="box-suggets">
+        <span class="signup">Bạn chưa có tài khoản?
+          <a href="#" id="signupLabel">Đăng ký</a>
+        </span>
       </div>
-      <div class="form-group">
-        <p class="gmail">Gmail:</p>
-        <input type="text" name="gmail" id="pass">
+    </div>
+    <div class="registration form">
+      <header>Đăng ký</header>
+      <form action="#">
+        <p class="text-input">Họ và tên:</p>
+        <input type="text" id="name" placeholder="Nhập họ tên của bạn">
+        <p class="text-input">Họ và tên:</p>
+        <input type="text" id='username' placeholder="Enter your username">
+        <p class="text-input">Nhập gmail của bạn:</p>
+        <input type="text" id='email' placeholder="Nhập email của bạn">
+        <p class="text-input">Nhập mật khẩu:</p>
+        <input type="password" id='password' placeholder="Tạo mật khẩu mới">
+        <input type="button" class="button btn btn-signup" value="Signup">
+      </form>
+      <div class="box-suggets">
+        <span class="signup">Bạn đã có tài khoản?
+          <a href="#" id="loginLabel">Đăng nhập</a>
+        </span>
       </div>
-      <div class="form-group">
-        <p class="password">Password:</p>
-        <input type="password" name="pass" id="pass">
-      </div>
-      <a class="btn-login" href="login.html">SignUp</a>
-      <p class="login-desc">Login with a social media account</p>
-      <div class="icon-group">
-        <i class="icon icon-facebook fa-brands fa-facebook"></i>
-        <i class="icon icon-twitter fa-brands fa-twitter"></i>
-        <i class="icon icon-instagram fa-brands fa-instagram"></i>
+    </div>
+    <div class="forgot form">
+      <header>Lấy lại mật khẩu</header>
+      <form action="#">
+        <input type="text" id='forgotinp' placeholder="Nhập email của bạn">
+        <input type="button" class="button btn btn-forgot" value="Submit">
+      </form>
+      <div class="box-suggets">
+        <span class="signup">Bạn không có tài khoản?
+          <a href="#" id="signupLabel">Đăng ký</a>
+        </span>
+        <br>
+        <span class="signup">Bạn đã có tài khoản?
+          <a href="#" id="loginLabel">Đăng nhập</a>
+        </span>
       </div>
     </div>
   </div>
-  <div class="popup-buttons">
-    <a href="index.html" class="popup-btn">Sign Up Page</a>
-    <a href="login.html" class="popup-btn">Login Page</a>
-    <a href="profile.html" class="popup-btn">Profile Page</a>
-  </div>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="./asset/js/login.js" type="module"></script>
 </body>
 
 </html>

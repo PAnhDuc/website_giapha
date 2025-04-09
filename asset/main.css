@@ -1254,6 +1254,11 @@ header::before {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+#memberCount {
+  font-size: 25px;
+  margin: 30px 15px -3px 0px;
+}
+
 .search-bar select {
   padding: 0px 35px;
   border: 1px solid #ccc;
@@ -1279,29 +1284,10 @@ header::before {
   box-shadow: 0 0 5px rgba(212, 160, 23, 0.3);
 }
 
-.search-bar button {
-  background-color: #d4a017;
-  /* Màu vàng đậm, giống nút trong hình */
-  color: white;
-  cursor: pointer;
-  border: none;
-  padding: 10px 30px;
-  font-weight: bold;
-  border-radius: 7px;
-  max-width: 200px;
-  width: auto;
-}
-
-.search-bar button:hover {
-  background-color: #b8860b;
-}
-
 .table-container {
   margin: 15px 0;
   width: 100%;
   overflow-x: auto;
-  max-height: 500px;
-  height: 310px;
 }
 
 .table-container h2 {
@@ -1324,10 +1310,11 @@ td {
   text-align: center;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
+  width: 150px;
 }
 
 th {
-  background-color: #8b4513;
+  background-color: #7d5803;
   color: white;
   font-weight: bold;
 }
@@ -1337,16 +1324,17 @@ tr:nth-child(even) {
 }
 
 .btn {
-  padding: 13px 50px;
-  margin: 0px 50px;
+  padding: 15px 50px;
+  margin: 5px 50px;
   border: 0;
-  font-size: 13px;
+  width: 170px;
+  font-size: 14px;
   line-height: 15px;
   cursor: pointer;
   border-radius: 10px;
-  color: #000;
+  color: #fff;
   font-weight: 500;
-  display: inline-block;
+  display: block;
   text-decoration: none;
 }
 
@@ -1360,6 +1348,40 @@ tr:nth-child(even) {
   color: #000;
 }
 
+.btn.add {
+  background-color: #28a745;
+  width: 215px;
+  margin: 0;
+}
+
+.btn.add:hover {
+  background: #218838;
+}
+
+.btn.update {
+  background-color: #007bff;
+}
+
+.btn.update:hover {
+  background: #0056b3;
+}
+
+.btn.info {
+  background-color: #ffc107;
+}
+
+.btn.info:hover {
+  background: #e0a800;
+}
+
+.btn.delete {
+  background-color: #dc3545;
+}
+
+.btn.delete:hover {
+  background: #c82333;
+}
+
 .content_pk .add_blog-new {
   background: #45a049;
   color: #000;
@@ -1369,69 +1391,6 @@ tr:nth-child(even) {
   margin: auto;
   width: 175px;
   cursor: pointer;
-}
-
-.update {
-  background-color: #4CAF50;
-}
-
-/* Xanh lá */
-.info {
-  background-color: #ffca28;
-}
-
-/* Vàng */
-.edit {
-  background-color: #ff9800;
-}
-
-/* Cam */
-.delete {
-  background-color: #f44336;
-}
-
-/* Đỏ */
-
-.update:hover {
-  background-color: #45a049;
-  cursor: pointer;
-}
-
-.info:hover {
-  cursor: pointer;
-  background-color: #f57c00;
-}
-
-.edit:hover {
-  cursor: pointer;
-  background-color: #f57c00;
-}
-
-.delete:hover {
-  cursor: pointer;
-  background-color: #da190b;
-}
-
-.buttons {
-  margin: 15px 0;
-  text-align: right;
-}
-
-.buttons button {
-  padding: 8px 18px;
-  margin-left: 8px;
-  background-color: #d4a017;
-  /* Màu vàng đậm, giống nút trong hình */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.buttons button:hover {
-  background-color: #b8860b;
 }
 
 /* Màn hình lớn hơn 1200px (desktop): Giữ nguyên bố cục */
@@ -1505,6 +1464,10 @@ tr:nth-child(even) {
 
   .table-container h2 {
     font-size: 1.2em;
+  }
+
+  #memberCount {
+    font-size: 20px;
   }
 }
 

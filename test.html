@@ -2,65 +2,172 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Người Dùng</title>
-    <link rel="stylesheet" href="./asset/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./asset/main.css" />
+  <link rel="stylesheet" href="./asset/css/test.css">
+  <title>Trang Phả Hệ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+  <!-- Thêm Firebase SDK (chỉ cần database) -->
+<!-- Firebase App (cần thiết để khởi tạo Firebase) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 
 <body>
-    <div class="form profile-box">
-        <div class="form-main column">
-            <div class="profile-top">
-                <img src="./assets/img/profile-img.jpg" alt="" class="profile-img">
-                <h2 class="profile-heading">Ducccc</h2>
-                <p class="profile-mail">paduc3257@gmail.com</p>
-            </div>
-            <div class="profile-bottom">
-                <h2 class="profile-heading">
-                    About
-                </h2>
-                <p class="profile-desc">I'm Duc</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="#">
+            <!-- <img src="./asset/img/logo.png" alt="" class="logo_main"> -->
+          </a>
+        </li>
+        <li>
+          <a href="index.html">
+            <span class="icon"><i class="fa-solid fa-house sidebar_left--icon"></i></span>
+            <span class="title">Trang chủ</span>
+          </a>
+        </li>
+        <li>
+          <a href="phahe.html">
+            <span class="icon"><i class="fa-solid fa-users"></i></span>
+            <span class="title">Quản lí phả hệ</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="icon"><i class="fa-solid fa-book-bookmark"></i></span>
+            <span class="title">Quản lí phả ký</span>
+          </a>
+        </li>
+        <li>
+          <a href="phado.html">
+            <span class="icon"><i class="fa-solid fa-network-wired sidebar_left--icon"></i></span>
+            <span class="title">Quản lí phả đồ</span>
+          </a>
+        </li>
+        <li>
+          <a href="ngoaipha.html">
+            <span class="icon"><i class="fa-solid fa-book-open-reader"></i></span>
+            <span class="title">Ngoại phả</span>
+          </a>
+        </li>
+        <li>
+          <a href="phukhao.html">
+            <span class="icon"><i class="fa-solid fa-house-chimney"></i></span>
+            <span class="title">Phụ khảo</span>
+          </a>
+        </li>
+        <li>
+          <a href="hinhanh.html">
+            <span class="icon"><i class="fa-solid fa-images"></i></span>
+            <span class="title">Hình ảnh</span>
+          </a>
+        </li>
+        <li>
+          <a href="congduc.html">
+            <span class="icon"><i class="fa-solid fa-toolbox"></i></span>
+            <span class="title">Công đức</span>
+          </a>
+        </li>
+        <li>
+          <a href="login.html">
+            <span class="icon"><i class="fa-solid fa-right-to-bracket"></i></span>
+            <span class="title">Đăng xuất tài khoản</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-        <div class="form-main column">
-            <div class="profile-top ">
-                <h2 class="profile-heading">Personal Details</h2>
-                <div class="profile-left">
-                    <div class="form-group">
-                        <p class="username">Full Name:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Email:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Phone:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Password:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                </div>
-            </div>
-            <div class="profile-bottom">
-                <a class="btn btn-cancel" href="login.html">Cancel</a>
-                <a class="btn btn-update" href="#">Update</a>
-            </div>
-        </div>
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="search">
+        <label for="">
+          <input type="text" placeholder="Tìm kiếm" />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+      </div>
+      <div class="user">
+        <img src="" alt="User Avatar" />
+      </div>
     </div>
 
-    <div class="popup-buttons">
-        <a href="index.html" class="popup-btn">Sign Up Page</a>
-        <a href="login.html" class="popup-btn">Login Page</a>
-        <a href="profile.html" class="popup-btn">Profile Page</a>
+    <div class="main_content">
+      <div class="content_pk">
+        <div class="title-box">Phả Hệ Phạm</div>
+        <div class="search-bar">
+          <div class="search">
+            <label for="">
+              <input type="text" placeholder="Tìm kiếm" />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </label>
+          </div>
+          <button class="btn add">Thêm thành viên</button>
+        </div>
+
+        <h2>Danh sách thành viên</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Đời</th>
+                <th>Tên</th>
+                <th>Tổng chi - Ngắn - Nhận</th>
+                <th>Ngày</th>
+                <th>Bố/ mẹ</th>
+                <th>Thông tin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dữ liệu từ Firebase -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <h2 id="modalTitle">Thêm thành viên</h2>
+      <form id="userForm">
+        <div class="form-group">
+          <label for="generation">Đời:</label>
+          <input type="text" id="generation" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Tên:</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="birthDate">Ngày sinh:</label>
+          <input type="date" id="birthDate">
+        </div>
+        <div class="form-group">
+          <label for="deathDate">Ngày mất:</label>
+          <input type="date" id="deathDate">
+        </div>
+        <div class="form-group">
+          <label for="parent">Bố/Mẹ:</label>
+          <input type="text" id="parent">
+        </div>
+        <button type="submit" id="submitBtn">Lưu</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./asset/js/test.js"></script>
 </body>
 
 </html>

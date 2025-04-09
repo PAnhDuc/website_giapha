@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./asset/main.css" />
+  <link rel="stylesheet" href="./asset/css/modal-phahe.css" />
   <title>Trang Phả Hệ</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
-
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 
 <body>
@@ -73,7 +76,7 @@
         <li>
           <a href="login.html">
             <span class="icon"><i class="fa-solid fa-right-to-bracket"></i></span>
-            <span class="title">Đăng xuất tài khoản<nav></nav></span>
+            <span class="title">Đăng xuất tài khoản</span>
           </a>
         </li>
       </ul>
@@ -107,13 +110,10 @@
               <i class="fa-solid fa-magnifying-glass"></i>
             </label>
           </div>
-          <button type="button">Thêm người dùng</button>
-          <button type="button">Xoá người dùng</button>
-          <button type="button">Sửa người dùng</button>
-          <button type="button">Xuất excel</button>
+          <button class="btn add">Thêm thành viên</button>
         </div>
 
-        <h2>Danh sách thành viên, tổng số: 2</h2>
+        <h2 id="memberCount">Danh sách thành viên, tổng số: 0</h2>
         <div class="table-container">
           <table>
             <thead>
@@ -122,7 +122,7 @@
                 <th>Đời</th>
                 <th>Tên</th>
                 <th>Tổng chi - Ngắn - Nhận</th>
-                <th>Ngày</th>
+                <th>Ngày mất</th>
                 <th>Bố/ mẹ</th>
                 <th>Thông tin</th>
               </tr>
@@ -138,7 +138,6 @@
                 <td>
                   <button class="btn update">Cập nhật</button>
                   <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
                   <button class="btn delete">Xóa</button>
                 </td>
               </tr>
@@ -152,236 +151,38 @@
                 <td>
                   <button class="btn update">Cập nhật</button>
                   <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
                   <button class="btn delete">Xóa</button>
                 </td>
               </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr> 
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Trần Liễu</td>
-                <td>An Sinh vương</td>
-                <td>0 - 0 - 0</td>
-                <td>Ngày sinh: - Ngày mất: -</td>
-                <td>Bố Trần Thùy</td>
-                <td>
-                  <button class="btn update">Cập nhật</button>
-                  <button class="btn info">Thông tin</button>
-                  <button class="btn edit">Sửa</button>
-                  <button class="btn delete">Xóa</button>
-                </td>
-              </tr>
-              
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   </div>
+
+  <!-- Modal for adding/editing members -->
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalTitle">Thêm thành viên</h2>
+      <form id="userForm">
+        <label for="generation">Đời:</label>
+        <input type="text" id="generation" required><br>
+        <label for="name">Tên:</label>
+        <input type="text" id="name" required><br>
+        <label for="birthDate">Ngày sinh:</label>
+        <input type="date" id="birthDate"><br>
+        <label for="deathDate">Ngày mất:</label>
+        <input type="date" id="deathDate"><br>
+        <label for="parent">Bố/Mẹ:</label>
+        <input type="text" id="parent" required><br>
+        <button type="submit" id="submitBtn">Lưu</button>
+      </form>
+    </div>
   </div>
 
+  <script src="./asset/js/add-user.js" ></script>
   <script src="./asset/js/main.js"></script>
 </body>
 

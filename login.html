@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Người Dùng</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="./asset/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
 </head>
-
 <body>
-    <div class="form profile-box">
-        <div class="form-main column">
-            <div class="profile-top">
-                <img src="https://picsum.photos/150" alt="Profile Image" class="profile-img">
-                <h2 class="profile-heading">Ducccc</h2>
-                <p class="profile-mail">paduc3257@gmail.com</p>
+    <div class="form">
+        <div class="form-main">
+            <h2 class="form-heading">
+                Login
+            </h2>
+            <div class="form-group">
+                <p class="username">Email:</p>
+                <input type="email" name="email" id="email" placeholder="Enter your email">
             </div>
-            <div class="profile-bottom">
-                <h2 class="profile-heading">About</h2>
-                <p class="profile-desc">I'm Duc</p>
+            <div class="form-group">
+                <p class="password">Password:</p>
+                <input type="password" name="pass" id="pass" placeholder="Enter your password">
             </div>
-        </div>
-
-        <div class="form-main column">
-            <div class="profile-top">
-                <h2 class="profile-heading">Personal Details</h2>
-                <div class="profile-left">
-                    <div class="form-group">
-                        <p class="username">Full Name:</p>
-                        <input type="text" name="fullName" id="fullName" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Email:</p>
-                        <input type="text" name="email" id="email" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Phone:</p>
-                        <input type="text" name="phone" id="phone" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Password:</p>
-                        <input type="password" name="password" id="password" class="profile-input">
-                    </div>
-                </div>
-            </div>
-            <div class="profile-bottom">
-                <a class="btn btn-cancel" href="login.html">Cancel</a>
-                <a class="btn btn-update" href="#">Update</a>
+            <a class="btn-login" href="#" id="loginButton">Log In</a>
+            <p class="login-desc">Login with a social media account</p>
+            <div class="icon-group">
+                <i class="icon icon-facebook fa-brands fa-facebook"></i>
+                <i class="icon icon-twitter fa-brands fa-twitter"></i>
+                <i class="icon icon-instagram fa-brands fa-instagram"></i>
             </div>
         </div>
     </div>
@@ -65,6 +41,7 @@
     </div>
 
     <script>
+        // Cấu hình Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyAtOEfRZNereDDI5o5ivTkI9Ht_RAHex0U",
             authDomain: "test-web-f5a0a.firebaseapp.com",
@@ -76,61 +53,48 @@
             measurementId: "G-892G3PZS52"
         };
 
+        // Khởi tạo Firebase
         firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
         const auth = firebase.auth();
 
+        // Kiểm tra trạng thái đăng nhập
         auth.onAuthStateChanged((user) => {
             if (user) {
-                const uid = user.uid;
-                const userRef = database.ref('users/' + uid);
-
-                userRef.once('value', (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        document.getElementById('fullName').value = data.fullName || '';
-                        document.getElementById('email').value = data.email || user.email || '';
-                        document.getElementById('phone').value = data.phone || '';
-                    }
-                });
-
-                document.querySelector('.btn-update').addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    const fullName = document.getElementById('fullName').value;
-                    const email = document.getElementById('email').value;
-                    const phone = document.getElementById('phone').value;
-                    const password = document.getElementById('password').value;
-
-                    const updatedData = {
-                        fullName: fullName,
-                        email: email,
-                        phone: phone
-                    };
-
-                    userRef.update(updatedData)
-                        .then(() => {
-                            alert('Cập nhật thông tin thành công!');
-                        })
-                        .catch((error) => {
-                            alert('Lỗi: ' + error.message);
-                        });
-
-                    if (password) {
-                        user.updatePassword(password)
-                            .then(() => {
-                                alert('Cập nhật mật khẩu thành công!');
-                            })
-                            .catch((error) => {
-                                alert('Lỗi khi cập nhật mật khẩu: ' + error.message);
-                            });
-                    }
-                });
+                // Nếu đã đăng nhập, chuyển hướng đến trang profile
+                window.location.href = 'profile.html';
             } else {
-                window.location.href = 'login.html';
+                // Nếu chưa đăng nhập, giữ ở trang login và xử lý đăng nhập
+                console.log('Người dùng chưa đăng nhập, hiển thị form đăng nhập.');
             }
+        });
+
+        // Xử lý sự kiện đăng nhập
+        document.getElementById('loginButton').addEventListener('click', (e) => {
+            e.preventDefault(); // Ngăn chuyển hướng mặc định
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('pass').value.trim();
+
+            // Kiểm tra dữ liệu đầu vào
+            if (!email || !password) {
+                alert('Vui lòng điền đầy đủ email và mật khẩu!');
+                return;
+            }
+
+            // Đăng nhập với Firebase Authentication
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Đăng nhập thành công, chuyển hướng đến profile.html
+                    const user = userCredential.user;
+                    console.log('Đăng nhập thành công:', user.email);
+                    window.location.href = 'profile.html';
+                })
+                .catch((error) => {
+                    // Xử lý lỗi đăng nhập
+                    const errorMessage = error.message;
+                    alert('Lỗi đăng nhập: ' + errorMessage);
+                });
         });
     </script>
 </body>
-
 </html>
