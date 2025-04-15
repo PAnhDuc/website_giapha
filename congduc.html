@@ -10,7 +10,9 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
-
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 
 <body>
@@ -35,7 +37,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="phaky.html">
             <span class="icon"><i class="fa-solid fa-book-bookmark"></i></span>
             <span class="title">Quản lí phả ký</span>
           </a>
@@ -101,70 +103,64 @@
     <div class="main_content">
       <div class="content_pk">
         <div class="title-box">Công đức Nguyễn Kiên</div>
-      <div class="header">
         <div class="content">
-          <a href="#popup" class="add-event-button">Thêm mới sự kiện quyên góp</a>
+          <a href="#" class="add-event-button" onclick="showPopup()">Thêm mới sự kiện quyên góp</a>
           <h2>Danh sách sự kiện</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên</th>
-                <th>Mô tả</th>
-                <th>Ngày</th>
-                <th>Tổng tiền</th>
-                <th>Danh sách</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Danh sách quyên góp khuyên học ngày 1/6/2023</td>
-                <td></td>
-                <td>01-06-2023</td>
-                <td>15,140,000 đ</td>
-                <td><a href="xemds.html">Xem danh sách</a></td>
-              </tr>
-              <tr class="alternate">
-                <td>2</td>
-                <td>Danh sách công đức hợp đồng ngày 20/03/2023</td>
-                <td></td>
-                <td>20-03-2023</td>
-                <td>81,900,000 đ</td>
-                <td><a href="xemds.html">Xem danh sách</a></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Danh sách công đức rằm tháng Giêng 2023</td>
-                <td></td>
-                <td>07-02-2023</td>
-                <td>27,955,000 đ</td>
-                <td><a href="xemds.html">Xem danh sách</a></td>
-              </tr>
-            </tbody>
-          </table>
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên</th>
+              <th>Mô tả</th>
+              <th>Ngày</th>
+              <th>Tổng tiền</th>
+              <th>Danh sách</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="eventTableBody"></tbody>
         </div>
-        <!-- Popup (Modal) Thêm mới sự kiện quyên góp -->
-        <div class="modal" id="popup">
-          <div class="modal-content">
-            <h3>Tên sự kiện</h3>
-            <label>Tên sự kiện</label>
-            <input type="text" placeholder="Nhập tên sự kiện">
-            <label>Mô tả ngắn</label>
-            <input type="text" placeholder="Nhập mô tả ngắn">
-            <label>Ngày</label>
-            <input type="date">
-            <div class="modal-buttons">
-              <a href="#" class="close-button">Quay lại</a>
-              <button class="save-button">Lưu thông tin</button>
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   </div>
+  </div>
+  <!-- Popup thêm/sửa sự kiện -->
+  <div class="modal" id="popup" style="display: none;">
+    <div class="modal-content">
+      <h3>Nhập thông tin sự kiện</h3>
+      <label>Tên sự kiện</label>
+      <input type="text" id="eventTitle" placeholder="Nhập tên sự kiện">
+      <label>Mô tả ngắn</label>
+      <input type="text" id="eventDesc" placeholder="Nhập mô tả ngắn">
+      <label>Ngày</label>
+      <input type="date" id="eventDate">
+      <div class="modal-buttons">
+        <a href="#" class="close-button" onclick="closePopup()">Quay lại</a>
+        <button class="save-button" onclick="saveEvent()">Lưu thông tin</button>
+      </div>
+    </div>
+  </div>
+  <!-- Popup xác nhận xóa -->
+  <div class="delete-overlay" id="deletePopupOverlay">
+    <div class="delete-popup">
+      <span class="delete-close-btn" onclick="closeDeletePopup()">✖</span>
+      <h3>Bạn có chắc chắn muốn xóa</h3>
+      <p id="deleteInfo">Thông tin xóa: kiện</p>
+      <button class="btn-cancel" onclick="closeDeletePopup()">Đóng</button>
+      <button class="btn-confirm" onclick="confirmDelete()">Xóa</button>
+    </div>
+  </div>
+  <!-- Popup thông báo thành công -->
+  <div class="success-overlay" id="successPopupOverlay">
+    <div class="success-popup">
+      <span class="success-close-btn" onclick="closeSuccessPopup()">✖</span>
+      <h3 id="successMessage">Thành công</h3>
+      <button class="btn-close" onclick="closeSuccessPopup()">Đóng</button>
+    </div>
+  </div>
+
   <script src="./asset/js/main.js"></script>
+  <script type="module" src="./asset/js/congduc.js"></script>
 </body>
 
 </html>

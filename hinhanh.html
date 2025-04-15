@@ -35,7 +35,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="phaky.html">
             <span class="icon"><i class="fa-solid fa-book-bookmark"></i></span>
             <span class="title">Quản lí phả ký</span>
           </a>
@@ -100,54 +100,37 @@
     <!-- CODE HERE -->
     <div class="main_content">
       <div class="content_pk">
-        <div class="title-box">
-          Thư viện Nguyễn Kiên
-        </div>
+        <div class="title-box">Thư viện Nguyễn Kiên</div>
         <br>
-        <a href="danganh.html" class="add-btn">Thêm mới</a>
-        <div class="gallery">
-          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok.jpg" alt="Hình 1">
-          </div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/nha-tho-toc-tran-2_1635345530-1.jpg" alt="Hình 2">
-          </div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/1462785038_nha-tho-toc-tran-4-2.jpg" alt="Hình 3">
-          </div>
-          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/word-image-1715-1-2.jpeg"
-              alt="Hình 4"></div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/di-tich-lich-su-nha-tran-ivivu-1-2.jpg" alt="Hình 5">
-          </div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/co-cong-lon-trong-trieu-dai-nha-tran-la-ai-1-2.jpg"
-              alt="Hình 6"></div>
-          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/tran_500-2.jpg"
-              alt="Hình 7">
-          </div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/11-1650024488597-1650024492271442437571-1.jpg"
-              alt="Hình 8"></div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/ongvuathiensuvietnamtranthaitongtrancanh143230-d6e395e6-0711-2.jpg"
-              alt="Hình 9"></div>
-          <div class="gallery-item"><img
-              src="https://phanmemgiapha.vn/public/images/file/1/ai-khong-mang-ho-tran-nhung-lam-vua-nha-tran-4-1.jpg"
-              alt="Hình 10"></div>
-          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok-2.jpg"
-              alt="Hình 11">
-          </div>
-          <div class="gallery-item"><img src="https://phanmemgiapha.vn/public/images/file/1/anh_4_ok-2.jpg"
-              alt="Hình 12">
-          </div>
-        </div>
-      </div>
+        <a href="danganh.html" class="add-btn">Thêm mới ảnh vào album</a>
+        <button id="deleteAlbum" class="delete-album-btn">🗑️ Xóa album</button>
+        <div class="gallery" id="gallery"></div>
     </div>
-  </div>
+</div>
 
-  </div>
+<!-- Popup xác nhận xóa -->
+<div class="delete-overlay" id="deletePopupOverlay">
+    <div class="delete-popup">
+        <span class="delete-close-btn" onclick="closeDeletePopup()">✖</span>
+        <h3>Bạn có chắc chắn muốn xóa</h3>
+        <p>Xóa vĩnh viễn album này</p>
+        <button class="btn-cancel" onclick="closeDeletePopup()">Đóng</button>
+        <button class="btn-confirm" onclick="confirmDelete()">Xóa</button>
+    </div>
+</div>
+
+<!-- Popup thông báo thành công -->
+<div class="success-overlay" id="successPopupOverlay">
+    <div class="success-popup">
+        <span class="success-close-btn" onclick="closeSuccessPopup()">✖</span>
+        <h3 id="successMessage">Xóa thành công album</h3>
+        <button class="btn-close" onclick="closeSuccessPopup()">Đóng</button>
+    </div>
+</div>
 
   <script src="./asset/js/main.js"></script>
+  <script type="module" src="./asset/js/hinhanh.js"></script>
+
 </body>
 
 </html>
