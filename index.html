@@ -15,9 +15,9 @@
     <div class="login form">
       <header>Đăng Nhập</header>
       <form action="#">
-        <p class="text-input">Gmail:</p>
+        <p class="text-input">Tên tài khoản hoặc gmail</p>
         <input type="text" id='inUsr' placeholder="Nhập gmail của bạn" required>
-        <p class="text-input">Mật khẩu:</p>
+        <p class="text-input">Mật khẩu</p>
         <input type="password" id="inPass" placeholder="Nhập mật khẩu" required>
         <div class="signup">
           <a href="#" id="forgotLabel">Quên mật khẩu?</a>
@@ -33,13 +33,13 @@
     <div class="registration form">
       <header>Đăng ký</header>
       <form action="#">
-        <p class="text-input">Họ và tên:</p>
+        <p class="text-input">Họ và tên</p>
         <input type="text" id="name" placeholder="Nhập họ tên của bạn">
-        <p class="text-input">Họ và tên:</p>
-        <input type="text" id='username' placeholder="Enter your username">
-        <p class="text-input">Nhập gmail của bạn:</p>
+        <p class="text-input">Tên đăng nhập</p>
+        <input type="text" id='username' placeholder="Nhập tên đăng nhập của bạn">
+        <p class="text-input">Nhập gmail của bạn</p>
         <input type="text" id='email' placeholder="Nhập email của bạn">
-        <p class="text-input">Nhập mật khẩu:</p>
+        <p class="text-input">Nhập mật khẩu</p>
         <input type="password" id='password' placeholder="Tạo mật khẩu mới">
         <input type="button" class="button btn btn-signup" value="Signup">
       </form>
@@ -66,10 +66,24 @@
       </div>
     </div>
   </div>
+  <!-- Thêm div thông báo -->
+  <div id="notification" class="slide-notification" style="display: none;">
+  </div>
+
+  <!-- Sửa lại phần script -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="./asset/js/login.js" type="module"></script>
+  <script src="./asset/js/login.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Kiểm tra nếu đã có token, chuyển hướng đến trang home
+      const token = localStorage.getItem('userToken');
+      if (token) {
+        window.location.href = 'home.html';
+      }
+    });
+  </script>
 </body>
 
 </html>

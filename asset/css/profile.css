@@ -1,201 +1,171 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-:root {
-    --white-color: #ffffff;
-}
-
-input,
-textarea,
-select,
-button {
-    outline: none;
-}
-
-input {
-    line-height: normal;
-}
-
-label,
-button {
-    cursor: pointer;
-}
-
-a {
-    text-decoration: none;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: "Poppins", serif;
-    background: url('https://media-cdn-v2.laodong.vn/storage/newsportal/2023/8/26/1233821/Giai-Nhi-1--Nang-Tre.jpg') no-repeat center center fixed;
-    background-size: cover; /* Phủ đầy màn hình */
-}
-.popup-buttons {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: url("../img/bg.jpg") no-repeat center center/cover; /* Đổi đường dẫn nếu cần */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.popup-btn {
-    padding: 15px 70px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(0, 0, 0, 45%);
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
+/* Card container */
+.profile-card {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  width: 420px;
+  max-width: 95vw;
+  padding: 25px 25px;
+  position: relative;
+  text-align: center;
+  overflow: visible;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+.profile-card:hover {
+  box-shadow: 0 12px 40px rgba(255, 106, 159, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.popup-btn:hover {
-    background-color: rgb(0, 0, 0, 60%);
+/* Avatar */
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #fff;
+  box-shadow: 0 4px 24px rgba(255, 106, 159, 0.18);
+  position: absolute;
+  left: 50%;
+  top: -55px;
+  transform: translateX(-50%);
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+.profile-avatar:hover {
+  box-shadow: 0 8px 32px rgba(255, 106, 159, 0.28);
 }
 
-.form-main {
-    background: rgba(0, 0, 0, 0%); /* Màu đen trong suốt */
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Đường viền màu trắng mờ */
-    backdrop-filter: blur(10px); /* Làm mờ nền */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Hiệu ứng đổ bóng */
-    border-radius: 15px; /* Bo góc mượt mà */
-    width: 350px;
-    padding: 20px;
-    text-align: center;
-    color: var(--white-color);
+/* Edit Profile Form */
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 60px;
 }
 
-.form-main .form-heading {
-    font-size: 30px;
-    text-align: center;
+.profile-avatar-container {
+  position: absolute;
+  top: 5px;
 }
 
-.form-group {
-    margin: 15px 0px;
-}
+/* Input style */
 
-.form-group .username, .password, .gmail {
-    font-size: 20px;
-    margin-bottom: 5px;
-    text-align: left;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 6px;
-    border-radius: 6px;
-    border: 0;
-    background: rgb(0 0 0 / 20%);
-    padding: 12px;
-}
-
-.form-group input:hover {
-    cursor: pointer;
-}
-
-.btn-login:hover {
-    background: rgba(0, 0, 0, 35%); /* Màu đen trong suốt */
-    cursor: pointer;
-}
-
-.btn-login {
-    color: var(--white-color);
-    display: block;
-    font-size: 20px;
-    background: rgba(0, 0, 0, 15%); /* Màu đen trong suốt */
-    width: 100%;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 25px;
-}
-
-.form-main .login-desc {
-    margin: 15px 0px;
-}
-
-.icon-group .icon {
-    font-size: 22px;
-    margin: 0px 5px;
-}
-
-.icon-group .icon-facebook:hover {
-    color: #0866FF;
-    cursor: pointer;
-}
-
-.icon-group .icon-twitter:hover {
-    color: #24A4F2;
-    cursor: pointer;
-}
-
-.icon-group .icon-instagram:hover {
-    color:  #FC0AC8;
-    cursor: pointer;
-}
-
-/* Profile Page */
-
-.btn {
-    padding: 10px 20px;
-    background: rgb(0, 0, 0, 15%);
-    border-radius: 11px;
-}
-
-.btn-cancel {
-    color: var(--white-color);
-    background-color: #6c757dd6;
-}
-
-.btn-update {
-    color: #ffffff;
-    background: #169116;
-}
-
-.profile-bottom .btn-cancel:hover,
-.profile-bottom .btn-update:hover {
-    opacity: 0.9;
-}
-
-.profile-box {
-    display: flex;
-    gap: 10px;
-}
-
-.column {
-    flex: 1;
-}
-
-.profile-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    margin: auto;
-}
-
-.profile-bottom {
-    margin-top: 35px;
+.profile-label {
+  text-align: left;
+  display: block;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 
 .profile-input {
-    width: 306px !important;
+  max-width: 100%;
+  width: 420px;
+    padding: 10px 20px;
+    border: 1px solid #33333326;
+  border-radius: 14px;
+  font-size: 1.08rem;
+  margin-bottom: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(31, 38, 135, 0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(2px);
+  box-sizing: border-box;
+}
+.profile-input::placeholder {
+  color: #fff;
+  opacity: 0.85;
+}
+.profile-input:focus {
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 4px 16px rgba(255, 106, 159, 0.18);
+}
+
+/* Avatar upload button */
+.avatar-upload-btn {
+  position: absolute;
+  bottom: -65px;
+  right: -65px;
+  background: linear-gradient(135deg, #ff6a9f 0%, #ffb86c 100%);
+  color: #fff;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(255, 106, 159, 0.15);
+  transition: background 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar-upload-btn:hover {
+  background: #ff8a65;
+  box-shadow: 0 4px 16px rgba(255, 106, 159, 0.18);
+}
+
+/* Name & info */
+.profile-name input,
+.profile-location input,
+.profile-job input {
+  text-align: left;
+  font-weight: 500;
+  color: #000;
+}
+
+.profile-btn {
+  margin-top: 10px;
+  padding: 13px 38px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #ff6a9f 0%, #ffb86c 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(255, 106, 159, 0.12);
+  cursor: pointer;
+  transition: filter 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.5px;
+}
+.profile-btn:hover {
+  filter: brightness(0.95);
+  box-shadow: 0 4px 18px rgba(255, 106, 159, 0.18);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .profile-card {
+    padding: 0 0 24px 0;
+  }
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    top: -45px;
+  }
+  .profile-name {
+    font-size: 1.3rem;
+    margin-top: 55px;
+  }
+  .profile-input {
+    max-width: 95vw;
+  }
 }

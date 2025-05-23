@@ -5,9 +5,10 @@ const firebaseConfig = {
     apiKey: "AIzaSyAtOEfRZNereDDI5o5ivTkI9Ht_RAHex0U",
     authDomain: "test-web-f5a0a.firebaseapp.com",
     projectId: "test-web-f5a0a",
-    storageBucket: "test-web-f5a0a.appspot.com",
+    storageBucket: "test-web-f5a0a.firebasestorage.app",
     messagingSenderId: "230169455517",
     appId: "1:230169455517:web:a21536928823eb1d105d74",
+    measurementId: "G-892G3PZS52"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -43,33 +44,47 @@ function convertImageToBase64(file) {
 }
 
 async function savePost() {
-    const title = document.getElementById("postTitle").value;
-    const content = document.getElementById("postContent").value;
-    const imageFile = document.getElementById("postImage").files[0];
+    try {
+        const title = document.getElementById("postTitle").value;
+        const content = document.getElementById("postContent").value;
+        const imageFile = document.getElementById("postImage").files[0];
 
-    if (title.trim() === "" || content.trim() === "") return;
+        // Thêm log để kiểm tra giá trị
+        console.log('Title:', title);
+        console.log('Content:', content);
+        
+        // Kiểm tra cả khoảng trắng và undefined/null
+        if (!title || !content || title.trim() === "" || content.trim() === "") {
+            alert("Vui lòng nhập đầy đủ tiêu đề và nội dung!");
+            return;
+        }
 
-    let imageBase64 = "";
-    if (imageFile) {
-        imageBase64 = await convertImageToBase64(imageFile);
+        let imageBase64 = "";
+        if (imageFile) {
+            imageBase64 = await convertImageToBase64(imageFile);
+        }
+
+        if (editingPostId) {
+            await updateDoc(doc(db, "posts", editingPostId), {
+                title,
+                content,
+                imageBase64
+            });
+        } else {
+            await addDoc(collection(db, "posts"), {
+                title,
+                content,
+                imageBase64,
+                timestamp: serverTimestamp()
+            });
+        }
+        closeModal();
+        loadPosts();
+        alert("Lưu bài viết thành công!");
+    } catch (error) {
+        console.error("Chi tiết lỗi:", error);
+        alert("Có lỗi xảy ra khi lưu bài viết!");
     }
-
-    if (editingPostId) {
-        await updateDoc(doc(db, "posts", editingPostId), {
-            title,
-            content,
-            imageBase64
-        });
-    } else {
-        await addDoc(collection(db, "posts"), {
-            title,
-            content,
-            imageBase64,
-            timestamp: serverTimestamp()
-        });
-    }
-    closeModal();
-    loadPosts();
 }
 
 async function loadPosts() {

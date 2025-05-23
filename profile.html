@@ -1,66 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Page</title>
-    <link rel="stylesheet" href="./asset/css/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link rel="stylesheet" href="./asset/css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-<body>
-    <div class="form profile-box">
-        <div class="form-main column">
-            <div class="profile-top">
-                <img src="./assets/img/profile-img.jpg" alt="" class="profile-img">
-                <h2 class="profile-heading">Ducccc</h2>
-                <p class="profile-mail">paduc3257@gmail.com</p>
-            </div>
-            <div class="profile-bottom">
-                <h2 class="profile-heading">
-                    About
-                </h2>
-                <p class="profile-desc">I'm Duc</p>
-            </div>
+  <body>
+    <div class="profile-card">
+      <form class="profile-edit-form" enctype="multipart/form-data">
+        <div class="profile-avatar-container">
+          <img class="profile-avatar" id="avatarPreview" src="" alt="" />
+          <label
+            for="avatarInput"
+            class="avatar-upload-btn"
+            title="Đổi ảnh đại diện"
+          >
+            <i class="fa fa-camera"></i>
+          </label>
+          <input
+            type="file"
+            id="avatarInput"
+            accept="image/*"
+            style="display: none"
+          />
         </div>
-
-        <div class="form-main column">
-            <div class="profile-top ">
-                <h2 class="profile-heading">Personal Details</h2>
-                <div class="profile-left">
-                    <div class="form-group">
-                        <p class="username">Full Name:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Email:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Phone:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                    <div class="form-group">
-                        <p class="username">Password:</p>
-                        <input type="text" name="name" id="name" class="profile-input">
-                    </div>
-                </div>
-            </div>
-            <div class="profile-bottom">
-                <a class="btn btn-cancel" href="login.html">Cancel</a>
-                <a class="btn btn-update" href="#">Update</a>
-            </div>
+        <div class="profile-name">
+          <label class="profile-label" for="fullname">Họ và tên</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            placeholder="Họ và tên"
+            class="profile-input"
+            value="Samantha Jones"
+            required
+          />
         </div>
+        <div class="profile-location">
+          <label class="profile-label" for="email">Gmail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Gmail"
+            class="profile-input"
+            value="samantha@example.com"
+            required
+          />
+        </div>
+        <div class="profile-job">
+          <label class="profile-label" for="phone">Số điện thoại</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Số điện thoại"
+            class="profile-input"
+            value="0123456789"
+            required
+          />
+        </div>
+        <div class="profile-job">
+          <label class="profile-label" for="password">Mật khẩu mới</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mật khẩu mới"
+            class="profile-input"
+          />
+        </div>
+        <button class="profile-btn" type="submit">Lưu thay đổi</button>
+      </form>
     </div>
-
-    <div class="popup-buttons">
-        <a href="index.html" class="popup-btn">Sign Up Page</a>
-        <a href="login.html" class="popup-btn">Login Page</a>
-        <a href="profile.html" class="popup-btn">Profile Page</a>
-    </div>
-</body>
-
+    <script>
+      // Xem trước ảnh đại diện khi chọn file mới
+      document
+        .getElementById("avatarInput")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+              document.getElementById("avatarPreview").src = evt.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+    </script>
+    <script src="./asset/js/profile.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  </body>
 </html>
