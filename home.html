@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./asset/main.css" />
-    <title>Trang Công Đức</title>
+    <title>Trang Quản Lý</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -16,7 +16,6 @@
       rel="stylesheet"
       href="https://unpkg.com/treeflex/dist/css/treeflex.css"
     />
-    <script src="./asset/js/authGuard.js"></script>
   </head>
 
   <body>
@@ -86,30 +85,21 @@
               <span class="title">Công đức</span>
             </a>
           </li>
-          <!-- Thay thẻ a bằng button cho nút đăng xuất -->
           <li>
-            <button
+            <a
               onclick="handleLogout()"
               class="logout-btn"
-              style="
-                background: none;
-                border: none;
-                width: 100%;
-                text-align: left;
-                padding: 10px;
-                cursor: pointer;
-              "
+              style="cursor: pointer"
             >
               <span class="icon"
                 ><i class="fa-solid fa-right-to-bracket"></i
               ></span>
               <span class="title">Đăng xuất tài khoản</span>
-            </button>
+            </a>
           </li>
         </ul>
       </div>
     </div>
-    <!-- main -->
     <div class="main">
       <div class="topbar">
         <div class="toggle">
@@ -121,9 +111,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
           </label>
         </div>
-        <!-- --userImg-- -->
         <div class="user"></div>
-        <!-- CODE HERE -->
       </div>
       <div class="main_content">
         <div class="content_pk">
@@ -131,37 +119,39 @@
         </div>
       </div>
     </div>
-    <!-- Thêm script auth.js trước các script khác -->
     <script src="./asset/js/auth.js"></script>
     <script src="./asset/js/main.js"></script>
     <script type="module" src="./asset/js/login.js"></script>
-    <script type="module">
-      import { renderUserAvatar } from "./asset/js/userInfo.js";
-      renderUserAvatar();
-    </script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Kiểm tra token ngay khi trang load
-        if (!checkAuth()) {
-          return; // Dừng thực thi nếu không có token
-        }
-
-        // Các chức năng khác của trang home...
-      });
-
       function handleLogout() {
+        // Xóa tất cả dữ liệu liên quan đến người dùng khỏi localStorage
         localStorage.removeItem("userToken");
         localStorage.removeItem("userId");
         localStorage.removeItem("userRole");
         localStorage.removeItem("userData");
         window.location.href = "index.html";
       }
+    </script>
+    <script type="module">
+      import { renderUserAvatar } from "./asset/js/userInfo.js";
 
-      // Thêm hàm chuyển đến trang profile
+      document.addEventListener("DOMContentLoaded", () => {
+        // Kiểm tra trạng thái đăng nhập khi trang tải
+        if (!checkAuth() && window.location.pathname !== "/index.html") {
+          window.location.href = "index.html";
+          return;
+        }
+
+        // Hiển thị avatar người dùng nếu đã đăng nhập
+        renderUserAvatar();
+      });
+
       function goToProfile() {
+        // Chuyển đến trang profile nếu đã đăng nhập
         if (checkAuth()) {
-          // Thực hiện chuyển đến trang profile
           window.location.href = "profile.html";
+        } else {
+          window.location.href = "index.html";
         }
       }
     </script>

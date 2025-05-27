@@ -1,255 +1,270 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  query,
+  where,
+  limit,
+  getDocs,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+// Cấu hình Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyAtOEfRZNereDDI5o5ivTkI9Ht_RAHex0U",
-    authDomain: "test-web-f5a0a.firebaseapp.com",
-    projectId: "test-web-f5a0a",
-    storageBucket: "test-web-f5a0a.firebasestorage.app",
-    messagingSenderId: "230169455517",
-    appId: "1:230169455517:web:a21536928823eb1d105d74",
-    measurementId: "G-892G3PZS52"
-  };
-  const firebaseApp = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const firestore = firebase.firestore();
-  
-  const signupForm = document.querySelector('.registration.form');
-  const loginForm = document.querySelector('.login.form');
-  const forgotForm = document.querySelector('.forgot.form');
-  const container = document.querySelector('.container');
-  const signupBtn = document.querySelector('.btn-signup');
-  const anchors = document.querySelectorAll('a');
-  
-  anchors.forEach(anchor => {
-    anchor.addEventListener('click', () => {
-      const id = anchor.id;
-      switch (id) {
-        case 'loginLabel':
-          signupForm.style.display = 'none';
-          loginForm.style.display = 'block';
-          forgotForm.style.display = 'none';
-          break;
-        case 'signupLabel':
-          signupForm.style.display = 'block';
-          loginForm.style.display = 'none';
-          forgotForm.style.display = 'none';
-          break;
-        case 'forgotLabel':
-          signupForm.style.display = 'none';
-          loginForm.style.display = 'none';
-          forgotForm.style.display = 'block';
-          break;
-      }
-    });
+  apiKey: "AIzaSyAtOEfRZNereDDI5o5ivTkI9Ht_RAHex0U",
+  authDomain: "test-web-f5a0a.firebaseapp.com",
+  projectId: "test-web-f5a0a",
+  storageBucket: "test-web-f5a0a.firebasestorage.app",
+  messagingSenderId: "230169455517",
+  appId: "1:230169455517:web:a21536928823eb1d105d74",
+  measurementId: "G-892G3PZS52",
+};
+
+// Khởi tạo Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
+
+// Lấy tham chiếu đến các phần tử DOM
+const loginForm = document.getElementById("login-form");
+const signupForm = document.getElementById("signup-form");
+const forgotForm = document.getElementById("forgot-form");
+const loginBtn = document.querySelector(".btn-login");
+const signupBtn = document.querySelector(".btn-signup");
+const forgotBtn = document.querySelector(".btn-forgot");
+
+// Hiển thị form mặc định và ẩn các form khác
+document.querySelector(".login.form").style.display = "block";
+document.querySelector(".registration.form").style.display = "none";
+document.querySelector(".forgot.form").style.display = "none";
+
+// Chuyển đổi giữa các form
+document.querySelectorAll("a[id$='Label']").forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = anchor.id;
+    document.querySelector(".registration.form").style.display =
+      id === "signupLabel" ? "block" : "none";
+    document.querySelector(".login.form").style.display =
+      id === "loginLabel" ? "block" : "none";
+    document.querySelector(".forgot.form").style.display =
+      id === "forgotLabel" ? "block" : "none";
   });
-  
-  function showNotification(message, type = 'success') {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.className = 'slide-notification'; // Reset class
-    if (type === 'error') {
-      notification.classList.add('error');
+});
+
+// Hiển thị thông báo với CSS animation
+function showNotification(message, type = "success") {
+  const notification = document.getElementById("notification");
+  if (!notification) return;
+  notification.textContent = message;
+  notification.className = `slide-notification ${type}`;
+  notification.style.display = "block";
+  setTimeout(() => {
+    notification.style.display = "none";
+  }, 3100); // Thời gian khớp với CSS animation
+}
+
+// Xử lý đăng ký
+async function handleSignup() {
+  try {
+    const name = document.getElementById("name").value;
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!name || !username || !email || !password) {
+      showNotification("Vui lòng điền đầy đủ thông tin", "error");
+      return;
     }
-    notification.style.display = 'block';
-    notification.classList.add('show');
 
-    setTimeout(() => {
-      notification.classList.remove('show');
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, 600);
-    }, 2500);
-  }
-  
-  signupBtn.addEventListener('click', () => {
-    const name = document.querySelector('#name').value;
-    const username = document.querySelector('#username').value;
-    const email = document.querySelector('#email').value.trim();
-    const password = document.querySelector('#password').value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        const uid = user.uid;
-
-        firestore.collection('users').doc(uid).set({
-          name: name,
-          username: username,
-          email: email,
-          role: 'user',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        // Không cần xác thực email nữa, chuyển luôn về form đăng nhập
-        showNotification('Đăng ký thành công! Bạn có thể đăng nhập ngay.');
-        setTimeout(() => {
-          signupForm.style.display = 'none';
-          loginForm.style.display = 'block';
-          forgotForm.style.display = 'none';
-        }, 2000);
-
-        // Nếu muốn tự động đăng nhập sau khi đăng ký, có thể chuyển hướng ở đây
-        // window.location.href = "home.html";
-      })
-      .catch((error) => {
-        showNotification('Lỗi trong quá trình đăng ký: ' + error.message);
-      });
-  });
-  
-  const loginBtn = document.querySelector('.btn-login');
-  loginBtn.addEventListener('click', () => {
-    const input = document.querySelector('#inUsr').value.trim();
-    const password = document.querySelector('#inPass').value;
-
-    // Kiểm tra nếu input là email
-    const isEmail = input.includes('@');
-
-    if (isEmail) {
-      // Đăng nhập bằng email
-      auth.signInWithEmailAndPassword(input, password)
-        .then(handleLoginSuccess)
-        .catch((error) => {
-          showNotification('Lỗi trong quá trình đăng nhập: ' + error.message);
-        });
-    } else {
-      // Đăng nhập bằng username: tìm email tương ứng
-      firestore.collection('users').where('username', '==', input).limit(1).get()
-        .then((querySnapshot) => {
-          if (!querySnapshot.empty) {
-            const userData = querySnapshot.docs[0].data();
-            const email = userData.email;
-            auth.signInWithEmailAndPassword(email, password)
-              .then(handleLoginSuccess)
-              .catch((error) => {
-                showNotification('Lỗi trong quá trình đăng nhập: ' + error.message);
-              });
-          } else {
-            showNotification('Không tìm thấy tài khoản với username này');
-          }
-        })
-        .catch((error) => {
-          showNotification('Lỗi khi tìm username: ' + error.message);
-        });
-    }
-  });
-
-  // Hàm xử lý đăng nhập thành công
-  function handleLoginSuccess(userCredential) {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const user = userCredential.user;
-    // Không cần xác thực email nữa, bỏ kiểm tra user.emailVerified
-    user.getIdToken(true)
-      .then((idToken) => {
-        localStorage.setItem('userToken', idToken);
-        localStorage.setItem('userId', user.uid);
 
-        // Lấy thông tin user từ firestore
-        firestore.collection('users').doc(user.uid).get()
-          .then((doc) => {
-            if (doc.exists) {
-              const userData = doc.data();
-              localStorage.setItem('userRole', userData.role);
-              localStorage.setItem('userData', JSON.stringify({
-                name: userData.name,
-                email: userData.email,
-                role: userData.role,
-                managedFamilyId: userData.managedFamilyId || null,
-                managedFamilyName: userData.managedFamilyName || null
-              }));
+    await setDoc(doc(firestore, "users", user.uid), {
+      name,
+      username,
+      email,
+      role: "user",
+      createdAt: serverTimestamp(),
+    });
 
-              showNotification('Bạn đã đăng nhập thành công');
-              setTimeout(() => {
-                window.location.href = "home.html";
-              }, 2000);
-            }
-          })
-          .catch((error) => {
-            console.error("Lỗi khi lấy thông tin user:", error);
-            showNotification('Có lỗi xảy ra khi lấy thông tin người dùng');
-          });
-      });
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ name, email, role: "user" })
+    );
+    showNotification("Đăng ký thành công! Bạn có thể đăng nhập ngay.");
+    setTimeout(() => {
+      document.querySelector(".registration.form").style.display = "none";
+      document.querySelector(".login.form").style.display = "block";
+      document.querySelector(".forgot.form").style.display = "none";
+    }, 2000);
+  } catch (error) {
+    showNotification(`Lỗi trong quá trình đăng ký: ${error.message}`, "error");
   }
-  
-  const forgotBtn = document.querySelector('.btn-forgot');
-  forgotBtn.addEventListener('click', () => {
-    const emailForReset = document.querySelector('#forgotinp').value.trim();
-    if (emailForReset.length > 0) {
-      auth.sendPasswordResetEmail(emailForReset)
-        .then(() => {
-          showNotification('Mật khẩu đã được gửi về email. Vui lòng kiểm tra email để lấy lại mật khẩu.', 'success');
-          signupForm.style.display = 'none';
-          loginForm.style.display = 'block';
-          forgotForm.style.display = 'none';
+}
+
+// Xử lý đăng nhập
+async function handleLogin() {
+  try {
+    const input = document.getElementById("inUsr").value.trim();
+    const password = document.getElementById("inPass").value;
+
+    if (!input || !password) {
+      showNotification("Vui lòng điền đầy đủ thông tin", "error");
+      return;
+    }
+
+    const isEmail = input.includes("@");
+
+    let email = input;
+    if (!isEmail) {
+      const q = query(
+        collection(firestore, "users"),
+        where("username", "==", input),
+        limit(1)
+      );
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        showNotification("Không tìm thấy tài khoản với username này", "error");
+        return;
+      }
+      email = querySnapshot.docs[0].data().email;
+    }
+
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    const idToken = await user.getIdToken(true);
+
+    localStorage.setItem("userToken", idToken);
+    localStorage.setItem("userId", user.uid);
+
+    // Lấy thông tin người dùng
+    const userDoc = await getDoc(doc(firestore, "users", user.uid));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          name: userData.name,
+          email: userData.email,
+          role: userData.role,
+          managedFamilyId: userData.managedFamilyId || null,
+          managedFamilyName: userData.managedFamilyName || null,
         })
-        .catch((error) => {
-          showNotification('Lỗi khi gửi email lấy lại mật khẩu: ' + error.message, 'error');
-        });
+      );
+      localStorage.setItem("userRole", userData.role);
+    }
+
+    showNotification("Đăng nhập thành công!");
+      window.location.href = "home.html";
+  } catch (error) {
+    showNotification(`Lỗi đăng nhập: ${error.message}`, "error");
+  }
+}
+
+// Xử lý quên mật khẩu
+async function handleForgotPassword() {
+  try {
+    const email = document.getElementById("forgotinp").value.trim();
+    if (!email) {
+      showNotification("Vui lòng nhập email để lấy lại mật khẩu.", "error");
+      return;
+    }
+
+    await sendPasswordResetEmail(auth, email);
+    showNotification(
+      "Link đặt lại mật khẩu đã được gửi về email. Vui lòng kiểm tra email.",
+      "success"
+    );
+    setTimeout(() => {
+      document.querySelector(".registration.form").style.display = "none";
+      document.querySelector(".login.form").style.display = "block";
+      document.querySelector(".forgot.form").style.display = "none";
+    }, 2000);
+  } catch (error) {
+    showNotification(`Lỗi: ${error.message}`, "error");
+  }
+}
+
+// Gắn sự kiện submit cho các form
+if (loginForm) {
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleLogin();
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleSignup();
+  });
+}
+
+if (forgotForm) {
+  forgotForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleForgotPassword();
+  });
+}
+
+// Kiểm tra trạng thái đăng nhập
+function checkAuth() {
+  return !!localStorage.getItem("userToken");
+}
+
+// Đăng xuất
+async function logout() {
+  try {
+    await signOut(auth);
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userData");
+    showNotification("Đăng xuất thành công!", "success");
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
+  } catch (error) {
+    showNotification(`Lỗi đăng xuất: ${error.message}`, "error");
+  }
+}
+
+// Kiểm tra quyền quản lý dòng họ
+function checkFamilyManagePermission(familyId) {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  return userData.managedFamilyId === familyId;
+}
+
+// Đặt các function vào global scope để sử dụng ở nơi khác
+window.checkAuth = checkAuth;
+window.logout = logout;
+window.checkFamilyManagePermission = checkFamilyManagePermission;
+window.goToProfile = function () {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = `profile.html?uid=${user.uid}`;
     } else {
-      showNotification('Vui lòng nhập email để lấy lại mật khẩu.', 'error');
+      showNotification("Vui lòng đăng nhập để xem hồ sơ!", "error");
     }
   });
-  
-  // Hàm chuyển hướng sang profile.html với UID của người dùng hiện tại
-  function goToProfile() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        const uid = user.uid;
-        window.location.href = `profile.html?uid=${uid}`; // Truyền UID qua URL
-      } else {
-        showNotification("Vui lòng đăng nhập để xem hồ sơ!", 'error');
-      }
-    });
-  }
-  
-  // Thêm hàm đăng xuất
-  function logout() {
-    auth.signOut().then(() => {
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userRole');
-      showNotification('Đăng xuất thành công!', 'success');
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 1000);
-    }).catch((error) => {
-      showNotification('Lỗi đăng xuất: ' + error.message, 'error');
-    });
-  }
-  
-  // Thêm hàm kiểm tra quyền quản lý dòng họ
-  function checkFamilyManagePermission(familyId) {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    return userData.managedFamilyId === familyId;
-  }
-  
-  // Export các hàm để sử dụng ở các file khác
-  window.checkAuth = checkAuth;
-  window.logout = logout;
-  window.checkFamilyManagePermission = checkFamilyManagePermission;
-
-  // Xử lý Enter cho form đăng nhập
-  document.querySelectorAll('.login.form input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        document.querySelector('.btn-login').click();
-      }
-    });
-  });
-
-  // Xử lý Enter cho form đăng ký
-  document.querySelectorAll('.registration.form input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        document.querySelector('.btn-signup').click();
-      }
-    });
-  });
-
-  // Xử lý Enter cho form quên mật khẩu
-  document.querySelectorAll('.forgot.form input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        document.querySelector('.btn-forgot').click();
-      }
-    });
-  });
+};
