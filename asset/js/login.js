@@ -128,13 +128,13 @@ async function handleSignup() {
     await setDoc(doc(firestore, "users", user.uid), {
       name,
       email,
-      role_id: 1,
+      role_id: 3,
       createdAt: serverTimestamp(),
     });
 
     localStorage.setItem(
       "userData",
-      JSON.stringify({ name, email, role_id: 1 })
+      JSON.stringify({ name, email, role_id: 3 })
     );
     showNotification("Đăng ký thành công! Bạn có thể đăng nhập ngay.");
     setTimeout(() => {
