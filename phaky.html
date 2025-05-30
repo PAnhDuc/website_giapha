@@ -5,11 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./asset/main.css" />
-  <title>Trang Hình Ảnh</title>
+  <title>Trang Phả ký</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+
 </head>
 
 <body>
@@ -28,7 +29,7 @@
           </a>
         </li>
         <li>
-          <a href="phahe.html">
+          <a href="#">
             <span class="icon"><i class="fa-solid fa-users"></i></span>
             <span class="title">Quản lí phả hệ</span>
           </a>
@@ -46,7 +47,7 @@
           </a>
         </li>
         <li>
-          <a href="ngoaipha.html">
+          <a href="#">
             <span class="icon"><i class="fa-solid fa-book-open-reader"></i></span>
             <span class="title">Ngoại phả</span>
           </a>
@@ -99,30 +100,152 @@
     <!-- CODE HERE -->
     <div class="main_content">
       <div class="content_pk">
-        <div class="title-box">
-          Thư viện Nguyễn Kiên
+        <div class="title-box">Phả ký Nguyễn Kiên</div>
+          <div class="button-content_pk">
+            <div class="text-box" onclick="showSlide('dinhlang')">Lược sử</div>
+            <div class="text-box" onclick="showSlide('vitodautien')">Vị tổ đầu tiên</div>
+            <div class="text-box" onclick="showSlide('tuduong')">Từ đường</div>
+            <div class="text-box" onclick="showSlide('buttich')">Bút tích</div>
+            <div class="text-box" onclick="showSlide('toquan')">Tổ quán</div>
+            <div class="text-box" onclick="showSlide('truyenthong')">Truyền thống</div>
+          </div>
+
+          <!-- Overlay để tắt khi nhấn ra ngoài -->
+          <div class="slide-overlay" id="overlay" onclick="hideAllSlides()"></div>
+
+          <!-- Slide giới thiệu Lược sử -->
+          <div class="slide" id="dinhlang-slide">
+            <div class="slide-content">
+              <h1>Lược sử</h1>
+              <p>Người họ Trần nổi tiếng trong gia phả là Trần Kinh (陳京), đến định cư tại làng Tức Mặc (nay là phường
+                Lộc
+                Vượng, thành phố Nam Định) sống bằng nghề ngư sinh vào đầu thế kỷ XII.
+                Cụ Trần Kinh sinh ra cụ Trần Hấp, cụ Trần Hấp sau sinh ra cụ Trần Lý. Gia đình cụ Trần Hấp có gia sản
+                lớn,
+                kẻ ở người làm đông đến vài trăm,
+                anh em Trần Lý cũng bỏ hẳn nghề chài lưới để chuyển sang quản lý điền trang, tuyển mộ người ở.
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Lược sử">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('dinhlang')">X</button>
+          </div>
+
+          <!-- Slide giới thiệu vị tổ đầu tiên  -->
+          <div class="slide" id="vitodautien-slide">
+            <div class="slide-content">
+              <h1>Vị tổ đầu tiên </h1>
+              <p>Gia đình ông, cho tới đời ông, đều làm nghề đánh cá và dần trở nên giàu có. Trần Thừa lớn lên khi cơ
+                nghiệp
+                nhà Lý đã suy yếu.
+                Hoàng đế khi ấy của nhà Lý là Lý Cao Tông bỏ bê chính sự khiến nền chính trị của Đại Việt lũng đoạn,
+                nhiều
+                nơi nổi dậy khởi nghĩa để lại những hậu quả nặng nề về kinh tế và chính trị.
+                Các tướng lĩnh địa phương cũng nhân lúc loạn lạc nuôi ý định xây dựng lực lượng riêng, trong đó có cha
+                Trần
+                Thừa là Trần Lý ở Hải Ấp.
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Tổ+Nghệ" alt="Vị tổ đầu tiên">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('vitodautien')">X</button>
+          </div>
+
+          <!-- Slide giới thiệu Từ đường -->
+          <div class="slide" id="tuduong-slide">
+            <div class="slide-content">
+              <h1>Từ đường</h1>
+              <p>
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Từ đường">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('tuduong')">X</button>
+          </div>
+
+          <!-- Slide giới thiệu Bút tích -->
+          <div class="slide" id="buttich-slide">
+            <div class="slide-content">
+              <h1>Bút tích</h1>
+              <p>Nhìn chung, triều Trần có thể chia ba thời kỳ: thời thứ nhất từ Thái Tông đến Nhân Tông là thời xây
+                dựng và chống Mông-Nguyên, thời thứ hai từ Anh Tông đến Hiến Tông (có thượng hoàng Minh Tông) là thời kế
+                tục, thời thứ ba từ Dụ Tông (sau khi thượng hoàng Minh Tông mất) tới khi kết thúc là thời suy tàn.
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Bút tích">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('buttich')">X</button>
+          </div>
+
+          <!-- Slide giới thiệu Tổ quán -->
+          <div class="slide" id="toquan-slide">
+            <div class="slide-content">
+              <h1>Tổ quán</h1>
+              <p>Xã An Sinh, huyện Đồng Triều là vùng đất được coi là quê gốc của nhà Trần. Theo sách Đông Triều huyện
+                phong thổ ký ghi: “Tổ tiên nhà Trần cư ngụ ở xã An Sinh, nhiều người làm nghề chài lưới, sau này mới
+                chuyển xuống ở xã Tức Mặc, huyện Mỹ Lộc, cho nên các vị đế vương của triều Trần đều đưa về an táng ở xã
+                An Sinh".
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Tổ quán">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('toquan')">X</button>
+          </div>
+
+          <!-- Slide giới thiệu Truyền thống -->
+          <div class="slide" id="truyenthong-slide">
+            <div class="slide-content">
+              <h1>Truyền thống</h1>
+              <p>Sử quan triều Lê Ngô Sĩ Liên khi biên soạn lịch sử về hoạt động của cung đình nhà Trần, đã nhận xét
+                rằng: “Vua tôi cùng vui, không câu nệ lễ phép, cũng là phong tục giản dị chất phác nhưng không có tiết
+                độ”.
+              </p>
+              <div class="images">
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Đình+Làng" alt="Truyền thống">
+                </div>
+                <div class="image">
+                  <img src="https://via.placeholder.com/300x200?text=Chùa+Trần" alt="Chùa Trần">
+                </div>
+              </div>
+            </div>
+            <button class="close-btn" onclick="hideSlide('truyenthong')">X</button>
+          </div>
+
         </div>
 
-        <div class="content">
-          <h2>Đăng ảnh vào thư viện</h2>
-          <div class="upload-box">
-            <input type="file" id="fileInput" multiple accept="image/*" class="file-input">
-            <label for="fileInput" class="file-label">Choose Files <span id="fileName">No file chosen</span></label>
-            <p class="drag-text">(hoặc) Kéo thả ảnh vào đây.</p>
-          </div>
-          <div class="album-input">
-            <input type="text" id="albumName" placeholder="Tên album (không bắt buộc)">
-          </div>
-          <div class="buttons att-btn">
-            <button onclick="window.location.href='/hinhanh.html'" class="back-btn att-back">Quay lại</button>
-            <button class="upload-btn att-upload" id="uploadBtn">Đăng ảnh</button>
-          </div>
-          <p id="status"></p>
-          <div id="preview-container"></div>
-        </div>
 
         <script src="./asset/js/main.js"></script>
-        <script type="module" src="./asset/js/danganh.js"></script>
 </body>
 
 </html>
