@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @font-face {
-  font-family: 'ong-do';
-  src: url('./font/UTMOngDoGia.woff2') format('woff2'),
-    url('./font/UTMOngDoGia.woff') format('woff');
+  font-family: "ong-do";
+  src: url("../asset/font/UTMOngDoGia.woff") format("woff2"),
+    url("../asset/font/UTMOngDoGia.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'ong-do2';
-  src: url('./font/UTMIsadora.woff2') format('woff2'),
-    url('./font/UTMIsadora.woff') format('woff');
+  font-family: "ong-do2";
+  src: url("../asset/font/UTMOngDoGia.woff2") format("woff2"),
+    url("../asset/font/UTMIsadora.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -307,21 +307,21 @@ body {
 .tf-tree .tf-nc:before,
 .tf-tree .tf-node-content:after,
 .tf-tree .tf-node-content:before {
-  border-left: .0625em solid #7d5803 !important;
+  border-left: 0.0625em solid #7d5803 !important;
   content: "";
   display: block;
   height: 16px !important;
-  left: calc(50% - .03125em);
+  left: calc(50% - 0.03125em);
   position: absolute;
-  width: .0625em;
+  width: 0.0625em;
 }
 
 .tf-tree li li:before {
-  border-top: .0625em solid #7d5803 !important;
+  border-top: 0.0625em solid #7d5803 !important;
   content: "";
   display: block;
   height: 1px !important;
-  left: -.03125em;
+  left: -0.03125em;
   position: absolute;
   top: -1.03125em;
   width: 100%;
@@ -346,12 +346,11 @@ body {
   padding: 0px 20px;
 }
 
-
 .title-box {
   background: url(https://phanmemgiapha.vn/public/upload/theme/bg-title-yellow.jpg);
   background-size: 100% 100%;
   padding: 75px;
-  font-family: 'ong-do';
+  font-family: "ong-do";
   margin-bottom: 35px;
   margin-top: 50px;
   display: inline-block;
@@ -373,9 +372,10 @@ body {
 }
 
 .text-box {
-  background: url(https://phanmemgiapha.vn/public/upload/theme/bg-khung.png) #7d5803;
+  background: url(https://phanmemgiapha.vn/public/upload/theme/bg-khung.png)
+    #7d5803;
   background-size: 100% 100%;
-  font-family: 'ong-do2';
+  font-family: "ong-do2";
   padding: 60px 85px;
   border-radius: 0;
   color: white;
@@ -450,7 +450,7 @@ body {
 }
 
 .slide h1 {
-  font-family: 'ong-do';
+  font-family: "ong-do";
   font-size: 40px;
   color: #333;
   margin-bottom: 25px;
@@ -700,7 +700,6 @@ body {
   }
 }
 
-
 /* CÔNG ĐỨC */
 
 header {
@@ -869,7 +868,7 @@ td a:hover {
   color: white;
 }
 .save-button:hover {
-  background-color: #6610f2; 
+  background-color: #6610f2;
 }
 /* CSS cho popup xác nhận xóa */
 .delete-overlay {
@@ -879,7 +878,7 @@ td a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -909,7 +908,8 @@ td a:hover {
   font-size: 14px;
   color: #333;
 }
-.delete-popup .btn-cancel, .delete-popup .btn-confirm {
+.delete-popup .btn-cancel,
+.delete-popup .btn-confirm {
   padding: 8px 20px;
   border: none;
   border-radius: 4px;
@@ -933,7 +933,7 @@ td a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 1001;
@@ -980,8 +980,8 @@ button {
 }
 /* Nút "Thêm mới ảnh vào album" */
 .add-btn {
-  background-color: #0d6efd; 
-  color: white; 
+  background-color: #0d6efd;
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -991,15 +991,15 @@ button {
   display: inline-block;
 }
 .add-btn:hover {
-  background-color: #6610f2; 
+  background-color: #6610f2;
 }
 /* Nút "Xóa album" */
 .delete-album-btn {
-  background-color: #dc3545; 
+  background-color: #dc3545;
   color: white;
   font-weight: bold;
   padding: 10px 15px;
-  margin-left: 5px; 
+  margin-left: 5px;
   border-radius: 8px;
 }
 .delete-album-btn:hover {
@@ -1031,7 +1031,7 @@ button {
 }
 /* Nút "Xóa ảnh" */
 .delete-btn {
-  background-color: #dc3545; 
+  background-color: #dc3545;
   color: white;
   margin-top: 5px;
   display: block;
@@ -1057,7 +1057,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Đảm bảo popup hiển thị trên cùng */
@@ -1087,7 +1087,8 @@ button {
   font-size: 14px;
   color: #333;
 }
-.delete-popup .btn-cancel, .delete-popup .btn-confirm {
+.delete-popup .btn-cancel,
+.delete-popup .btn-confirm {
   padding: 8px 20px;
   border: none;
   border-radius: 4px;
@@ -1112,7 +1113,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 1001; /* z-index cao hơn để hiển thị trên popup xác nhận xóa */
@@ -1149,51 +1150,52 @@ button {
 /* Responsive Design */
 @media (max-width: 1024px) {
   .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px;
   }
   .add-btn {
-      padding: 8px 18px;
-      font-size: 13px;
+    padding: 8px 18px;
+    font-size: 13px;
   }
 }
 @media (max-width: 768px) {
   .button-container {
-      text-align: center; /* Center buttons on mobile */
+    text-align: center; /* Center buttons on mobile */
   }
-  .add-btn, .delete-album-btn {
-      width: 100%;
-      padding: 8px 16px;
-      font-size: 12px;
-      margin: 5px 0; /* Stack buttons vertically */
+  .add-btn,
+  .delete-album-btn {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+    margin: 5px 0; /* Stack buttons vertically */
   }
   .delete-album-btn {
-      margin-left: 0; /* Remove margin on mobile */
+    margin-left: 0; /* Remove margin on mobile */
   }
   .gallery {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   .gallery-item img {
-      height: 200px;
+    height: 200px;
   }
 }
 @media (max-width: 480px) {
-  .add-btn, .delete-album-btn {
-      padding: 6px 12px;
+  .add-btn,
+  .delete-album-btn {
+    padding: 6px 12px;
   }
   .gallery {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .gallery-item img {
-      height: 150px;
+    height: 150px;
   }
   .gallery-item {
-      margin-bottom: 10px;
+    margin-bottom: 10px;
   }
 }
-
 
 /* Danh sách thành viên công đức*/
 
@@ -1263,8 +1265,8 @@ td:nth-child(6) {
   color: var(--text-dark);
 }
 
- /* Popup XemDS*/ 
- .overlay {
+/* Popup XemDS*/
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -1307,7 +1309,7 @@ input {
   cursor: pointer;
 }
 .save-btn:hover {
-  background-color: #6610f2; 
+  background-color: #6610f2;
 }
 /* CSS cho popup thông báo thành công */
 .success-overlay {
@@ -1317,7 +1319,7 @@ input {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
 }
@@ -1350,15 +1352,15 @@ input {
   background-color: #666;
   color: white;
 }
- /* CSS cho popup xác nhận xóa */
- .delete-overlay {
+/* CSS cho popup xác nhận xóa */
+.delete-overlay {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
 }
@@ -1387,7 +1389,8 @@ input {
   font-size: 14px;
   color: #333;
 }
-.delete-popup .btn-cancel, .delete-popup .btn-confirm {
+.delete-popup .btn-cancel,
+.delete-popup .btn-confirm {
   padding: 8px 20px;
   border: none;
   border-radius: 4px;
@@ -1540,8 +1543,8 @@ input {
 }
 
 .att-btn {
-  margin: auto!important;
-  text-align: -webkit-center!important;
+  margin: auto !important;
+  text-align: -webkit-center !important;
 }
 
 .upload-btn {
@@ -1652,7 +1655,6 @@ input {
   background: darkred;
 }
 
-
 /* PHA HE PAGE */
 header {
   text-align: center;
@@ -1679,7 +1681,7 @@ header h1 {
 
 /* Bỏ viền trang trí vì hình có khung đơn giản hơn */
 header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -2013,7 +2015,7 @@ tr:nth-child(even) {
   display: block;
   margin-top: 10px;
   font-weight: bold;
-  color: #007BFF;
+  color: #007bff;
   text-decoration: none;
   word-wrap: break-word;
   /* Đảm bảo tiêu đề không tràn */

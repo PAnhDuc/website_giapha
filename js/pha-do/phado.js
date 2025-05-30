@@ -1,6 +1,7 @@
-let people = [];
-let siblings = [];
-let keyCounter = 1;
+let people = [
+  { key: 1, name: "Tổ tiên", gender: "male" }
+];
+let keyCounter = 2;
 let myDiagram;
 
 function initDiagram() {
@@ -107,7 +108,10 @@ function initDiagram() {
     })
   );
 
-  updateDiagram(true);
+  myDiagram.model = new go.TreeModel(people);
+
+  // Lưu lại để cập nhật sau này
+  window.myDiagram = myDiagram;
 }
 
 // Hiển thị floating form thêm con dưới node
@@ -216,19 +220,13 @@ function updateDiagram(isInitial = false) {
   updateRelationPersonOptions();
 }
 function updateRelationPersonOptions() {
-  const sel = document.getElementById("relationPerson");
-  if (!sel) return;
-  const prev = sel.value;
-  sel.innerHTML = '<option value="">---</option>';
-  people.forEach((p) => {
-    const op = document.createElement("option");
-    op.value = p.key;
-    op.innerText = `[${p.key}] ${p.name}`;
-    sel.appendChild(op);
+  const select = document.getElementById("relationPerson");
+  select.innerHTML = '<option value="">---</option>';
+  people.forEach(person => {
+    select.innerHTML += `<option value="${person.key}">${person.name}</option>`;
   });
-  sel.value = prev;
 }
-// Xem chi tiết thành viên
+
 function showInfoModal(person) {
   const content = document.getElementById("infoModalContent");
   let html = `<p><span>Họ tên:</span> ${person.name}</p>`;
@@ -259,6 +257,8 @@ function handleLogout() {
 }
 document.addEventListener("DOMContentLoaded", () => {
   initDiagram();
+  updateRelationPersonOptions();
+  document.getElementById("addPersonForm").addEventListener("submit", addPerson);
 });
 document
   .getElementById("addPersonForm")
