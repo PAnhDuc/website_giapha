@@ -78,13 +78,20 @@ function showNotification(message, type = "success") {
 // Xử lý đăng ký
 async function handleSignup() {
   try {
-    const name = document.getElementById("name").value;
-    const username = document.getElementById("username").value;
+    const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    if (!name || !username || !email || !password) {
-      showNotification("Vui lòng điền đầy đủ thông tin", "error");
+    if (!name) {
+      showNotification("Vui lòng nhập họ và tên", "error");
+      return;
+    }
+    if (!email) {
+      showNotification("Vui lòng nhập email", "error");
+      return;
+    }
+    if (!password) {
+      showNotification("Vui lòng nhập mật khẩu", "error");
       return;
     }
 
@@ -97,7 +104,6 @@ async function handleSignup() {
 
     await setDoc(doc(firestore, "users", user.uid), {
       name,
-      username,
       email,
       role: "user",
       createdAt: serverTimestamp(),
@@ -124,27 +130,16 @@ async function handleLogin() {
     const input = document.getElementById("inUsr").value.trim();
     const password = document.getElementById("inPass").value;
 
-    if (!input || !password) {
-      showNotification("Vui lòng điền đầy đủ thông tin", "error");
+    if (!input) {
+      showNotification("Vui lòng nhập email", "error");
+      return;
+    }
+    if (!password) {
+      showNotification("Vui lòng nhập mật khẩu", "error");
       return;
     }
 
-    const isEmail = input.includes("@");
-
-    let email = input;
-    if (!isEmail) {
-      const q = query(
-        collection(firestore, "users"),
-        where("username", "==", input),
-        limit(1)
-      );
-      const querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) {
-        showNotification("Không tìm thấy tài khoản với username này", "error");
-        return;
-      }
-      email = querySnapshot.docs[0].data().email;
-    }
+    const email = input;
 
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -175,7 +170,7 @@ async function handleLogin() {
     }
 
     showNotification("Đăng nhập thành công!");
-      window.location.href = "home.html";
+    window.location.href = "home.html";
   } catch (error) {
     showNotification(`Lỗi đăng nhập: ${error.message}`, "error");
   }
