@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="loginForm">
+        <label>Email</label>
+        <input id="login_email" type="email" required>
+        <label>Password</label>
+        <input id="login_password" type="password" required>
+        <button type="submit">Đăng nhập</button>
+    </form>
+    <hr>
+    <form id="createTreeForm" style="display:none">
+        <label>Name</label>
+        <input id="name_tree" type="text">
+        <label>Description</label>
+        <input id="descrip_tree" type="text">
+        <label>Public</label>
+        <input id="bool_tree" type="checkbox">
+        <button type="submit">Khởi tạo tree</button>
+    </form>
+    <div id="treeList" style="display:none">
+        <h3>Danh sách cây đã tạo</h3>
+        <ul id="treesUl"></ul>
+    </div>
+    <script type="module">
+        import {
+            db,
+            collection,
+            doc,
+            setDoc,
+            getDocs,
+            serverTimestamp
+        } from "../js/firebase/firebase-config.js";
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        const auth = getAuth();
+
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const email = document.getElementById("login_email").value.trim();
+            const password = document.getElementById("login_password").value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Đăng nhập thành công!");
+            } catch (error) {
+                alert("Đăng nhập thất bại: " + error.message);
+            }
+        });
+
+        // Kiểm tra trạng thái đăng nhập để ẩn/hiện form
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("createTreeForm").style.display = "block";
+                document.getElementById("treeList").style.display = "block";
+                loadTrees();
+            } else {
+                document.getElementById("loginForm").style.display = "block";
+                document.getElementById("createTreeForm").style.display = "none";
+                document.getElementById("treeList").style.display = "none";
+            }
+        });
+
+        document.getElementById("createTreeForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const name = document.getElementById("name_tree").value.trim();
+            const description = document.getElementById("descrip_tree").value.trim();
+            const isPublic = document.getElementById("bool_tree").checked;
+            await createTree({ name, description, isPublic });
+            await loadTrees();
+        });
+
+        async function createTree({ name, description, isPublic }) {
+            try {
+                const treesRef = collection(db, "trees");
+                const treeDocRef = doc(treesRef); // random id
+                const accessCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                await setDoc(treeDocRef, {
+                    name,
+                    description,
+                    isPublic,
+                    accessCode,
+                    createdAt: serverTimestamp(),
+                    updatedAt: serverTimestamp()
+                });
+                alert("Tạo cây thành công! ID: " + treeDocRef.id);
+                return treeDocRef.id;
+            } catch (error) {
+                alert("Lỗi tạo cây phả hệ: " + error.message);
+                return null;
+            }
+        }
+
+        // Hiển thị danh sách các tree đã tạo
+        async function loadTrees() {
+            const treesUl = document.getElementById("treesUl");
+            treesUl.innerHTML = "Đang tải...";
+            try {
+                const treesRef = collection(db, "trees");
+                const snapshot = await getDocs(treesRef);
+                treesUl.innerHTML = "";
+                snapshot.forEach(docSnap => {
+                    const li = document.createElement("li");
+                    li.textContent = `${docSnap.data().name} (ID: ${docSnap.id})`;
+                    // Thêm nút để tạo member, event, permission cho tree này
+                    const btnMember = document.createElement("button");
+                    btnMember.textContent = "Thêm member";
+                    btnMember.onclick = () => addMember(docSnap.id);
+                    const btnEvent = document.createElement("button");
+                    btnEvent.textContent = "Thêm event";
+                    btnEvent.onclick = () => addEvent(docSnap.id);
+                    const btnPermission = document.createElement("button");
+                    btnPermission.textContent = "Thêm permission";
+                    btnPermission.onclick = () => addPermission(docSnap.id);
+                    li.appendChild(btnMember);
+                    li.appendChild(btnEvent);
+                    li.appendChild(btnPermission);
+                    treesUl.appendChild(li);
+                });
+            } catch (error) {
+                treesUl.innerHTML = "Lỗi tải cây: " + error.message;
+            }
+        }
+
+        // Function tạo member cho tree
+        async function addMember(treeId) {
+            const memberId = crypto.randomUUID();
+            const memberData = {
+                userId: auth.currentUser.uid,
+                fullname: prompt("Tên thành viên?"),
+                gender: prompt("Giới tính? (male/female)"),
+                dateOfBirth: prompt("Ngày sinh?"),
+                dateOfDeath: prompt("Ngày mất? (bỏ trống nếu còn sống)"),
+                photoUrl: prompt("Link ảnh? (bỏ trống nếu không có)"),
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp()
+            };
+            const memberRef = doc(collection(db, `trees/${treeId}/members`), memberId);
+            await setDoc(memberRef, memberData);
+            alert("Đã thêm member cho tree " + treeId);
+        }
+
+        // Function tạo event cho tree
+        async function addEvent(treeId) {
+            const eventId = crypto.randomUUID();
+            const eventData = {
+                name: prompt("Tên sự kiện?"),
+                date: prompt("Ngày diễn ra?"),
+                location: prompt("Địa điểm?"),
+                notification: prompt("Thông báo?"),
+                description: prompt("Mô tả?"),
+            };
+            const eventRef = doc(collection(db, `trees/${treeId}/events`), eventId);
+            await setDoc(eventRef, eventData);
+            alert("Đã thêm event cho tree " + treeId);
+        }
+
+        // Function tạo permission cho tree
+        async function addPermission(treeId) {
+            const userId = prompt("UserId cần cấp quyền?");
+            const permission = prompt("Quyền (owner/editor/viewer)?");
+            const permissionRef = doc(collection(db, `trees/${treeId}/permissions`), userId);
+            await setDoc(permissionRef, { permission });
+            alert("Đã thêm permission cho tree " + treeId);
+        }
+
+        // Function tạo relationship cho member
+        async function addRelationship(treeId, memberId) {
+            const relationshipId = crypto.randomUUID();
+            const relationshipData = {
+                relativeId: prompt("ID thành viên liên quan?"),
+                relationName: prompt("Quan hệ (cha, mẹ, vợ, chồng...)?"),
+                marriageDate: prompt("Ngày kết hôn? (bỏ trống nếu không có)"),
+                marriageStatus: prompt("Tình trạng hôn nhân? (đang kết hôn/ly hôn)"),
+            };
+            const relRef = doc(collection(db, `trees/${treeId}/members/${memberId}/relationships`), relationshipId);
+            await setDoc(relRef, relationshipData);
+            alert("Đã thêm relationship cho member " + memberId);
+        }
+    </script>
+</body>
+</html>
