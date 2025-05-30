@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   onAuthStateChanged,
   signOut,
+  fetchSignInMethodsForEmail,
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import {
   getFirestore,
@@ -75,6 +76,18 @@ function showNotification(message, type = "success") {
   }, 3100); // Thời gian khớp với CSS animation
 }
 
+// Hàm kiểm tra email hợp lệ
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Hàm kiểm tra mật khẩu hợp lệ
+function isValidPassword(password) {
+  // Mật khẩu phải có ít nhất 6 ký tự
+  return password.length >= 6;
+}
+
 // Xử lý đăng ký
 async function handleSignup() {
   try {
@@ -90,11 +103,20 @@ async function handleSignup() {
       showNotification("Vui lòng nhập email", "error");
       return;
     }
+    if (!isValidEmail(email)) {
+      showNotification("Email không hợp lệ", "error");
+      return;
+    }
     if (!password) {
       showNotification("Vui lòng nhập mật khẩu", "error");
       return;
     }
+    if (!isValidPassword(password)) {
+      showNotification("Mật khẩu phải có ít nhất 6 ký tự", "error");
+      return;
+    }
 
+    // Tạo user với Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -102,16 +124,17 @@ async function handleSignup() {
     );
     const user = userCredential.user;
 
+    // Lưu thông tin user vào Firestore (không lưu mật khẩu)
     await setDoc(doc(firestore, "users", user.uid), {
       name,
       email,
-      role: "user",
+      role_id: 1,
       createdAt: serverTimestamp(),
     });
 
     localStorage.setItem(
       "userData",
-      JSON.stringify({ name, email, role: "user" })
+      JSON.stringify({ name, email, role_id: 1 })
     );
     showNotification("Đăng ký thành công! Bạn có thể đăng nhập ngay.");
     setTimeout(() => {
@@ -120,7 +143,15 @@ async function handleSignup() {
       document.querySelector(".forgot.form").style.display = "none";
     }, 2000);
   } catch (error) {
-    showNotification(`Lỗi trong quá trình đăng ký: ${error.message}`, "error");
+    let errorMessage = "Lỗi trong quá trình đăng ký";
+    if (error.code === "auth/email-already-in-use") {
+      errorMessage = "Email này đã được sử dụng";
+    } else if (error.code === "auth/invalid-email") {
+      errorMessage = "Email không hợp lệ";
+    } else if (error.code === "auth/weak-password") {
+      errorMessage = "Mật khẩu quá yếu";
+    }
+    showNotification(`${errorMessage}: ${error.message}`, "error");
   }
 }
 
@@ -134,6 +165,10 @@ async function handleLogin() {
       showNotification("Vui lòng nhập email", "error");
       return;
     }
+    if (!isValidEmail(input)) {
+      showNotification("Email không hợp lệ", "error");
+      return;
+    }
     if (!password) {
       showNotification("Vui lòng nhập mật khẩu", "error");
       return;
@@ -141,6 +176,7 @@ async function handleLogin() {
 
     const email = input;
 
+    // Xác thực với Firebase Authentication
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
@@ -152,7 +188,7 @@ async function handleLogin() {
     localStorage.setItem("userToken", idToken);
     localStorage.setItem("userId", user.uid);
 
-    // Lấy thông tin người dùng
+    // Lấy thông tin người dùng từ Firestore
     const userDoc = await getDoc(doc(firestore, "users", user.uid));
     if (userDoc.exists()) {
       const userData = userDoc.data();
@@ -172,19 +208,42 @@ async function handleLogin() {
     showNotification("Đăng nhập thành công!");
     window.location.href = "home.html";
   } catch (error) {
-    showNotification(`Lỗi đăng nhập: ${error.message}`, "error");
+    let errorMessage = "Lỗi đăng nhập";
+    if (error.code === "auth/user-not-found") {
+      errorMessage = "Không tìm thấy tài khoản";
+    } else if (error.code === "auth/wrong-password") {
+      errorMessage = "Mật khẩu không đúng";
+    } else if (error.code === "auth/invalid-email") {
+      errorMessage = "Email không hợp lệ";
+    }
+    showNotification(`${errorMessage}: ${error.message}`, "error");
   }
 }
 
 // Xử lý quên mật khẩu
 async function handleForgotPassword() {
   try {
+    
     const email = document.getElementById("forgotinp").value.trim();
     if (!email) {
       showNotification("Vui lòng nhập email để lấy lại mật khẩu.", "error");
       return;
     }
 
+    if (!isValidEmail(email)) {
+      showNotification("Email không hợp lệ", "error");
+      return;
+    }
+    // Kiểm tra xem email có tồn tại trong hệ thống không
+    const usersRef = collection(firestore, "users");
+    const q = query(usersRef, where("email", "==", email), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      showNotification("Email này chưa được đăng ký trong hệ thống.", "error");
+      return;
+    }
+
+    // Nếu email tồn tại, gửi email đặt lại mật khẩu
     await sendPasswordResetEmail(auth, email);
     showNotification(
       "Link đặt lại mật khẩu đã được gửi về email. Vui lòng kiểm tra email.",
@@ -196,7 +255,13 @@ async function handleForgotPassword() {
       document.querySelector(".forgot.form").style.display = "none";
     }, 2000);
   } catch (error) {
-    showNotification(`Lỗi: ${error.message}`, "error");
+    let errorMessage = "Lỗi khi gửi email đặt lại mật khẩu";
+    if (error.code === "auth/invalid-email") {
+      errorMessage = "Email không hợp lệ";
+    } else if (error.code === "auth/user-not-found") {
+      errorMessage = "Email này chưa được đăng ký trong hệ thống";
+    }
+    showNotification(`${errorMessage}: ${error.message}`, "error");
   }
 }
 
