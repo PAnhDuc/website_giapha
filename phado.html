@@ -124,6 +124,7 @@
               <option value="root">Gốc (không có quan hệ trên)</option>
               <option value="parent">Con của</option>
               <option value="sibling">Anh/Chị/Em của</option>
+              <option value="spouse">Vợ/Chồng của</option> <!-- Thêm dòng này -->
             </select>
           </div>
           <div class="form-group">
@@ -131,6 +132,12 @@
             <select id="relationPerson">
               <option value="">---</option>
             </select>
+          </div>
+          <div class="form-group" id="parentSelects" style="display:none;">
+            <label for="fatherSelect">Chọn cha:</label>
+            <select id="fatherSelect"><option value="">---</option></select>
+            <label for="motherSelect" style="margin-left:10px;">Chọn mẹ:</label>
+            <select id="motherSelect"><option value="">---</option></select>
           </div>
           <button type="submit">Thêm thành viên</button>
         </form>
@@ -145,9 +152,10 @@
         </div>
       </div>
     </div>
-    <div id="myDiagramDiv" style="height: 100%;"></div>
+    <div id="myDiagramDiv" style="width: 100%; background: #fcfcfc ;height: 500px;"></div>
     
-    <script type="module" src="./js/pha-do/phado.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/3.0.17/go.js" integrity="sha512-nmDVIEYvEfJvLe+BPswWjb1vEMkN2rtnOOMVkmS2c0gn4MbuhoYs55fVPbBx1r+JvUXyzOo9Iy6CVDlpIJO8dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/main.js" ></script>
+    <script src="./js/pha-do/phado.js"></script>
   </body>
 </html>

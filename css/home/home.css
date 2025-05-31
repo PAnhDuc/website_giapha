@@ -1,0 +1,53 @@
+.dashboard-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  flex: 1 1 250px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+.stat-users {
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+}
+.stat-families {
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+}
+.stat-online {
+  background: linear-gradient(135deg, #36d1c4 0%, #5b86e5 100%);
+}
+.stat-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.stat-desc {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+@media (max-width: 900px) {
+  .dashboard-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

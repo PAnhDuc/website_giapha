@@ -1,308 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <form id="loginForm">
-        <label>Email</label>
-        <input id="login_email" type="email" required>
-        <label>Password</label>
-        <input id="login_password" type="password" required>
-        <button type="submit">Đăng nhập</button>
-    </form>
-    <hr>
-    <form id="createTreeForm" style="display:none">
-        <label>Name</label>
-        <input id="name_tree" type="text">
-        <label>Description</label>
-        <input id="descrip_tree" type="text">
-        <label>Public</label>
-        <input id="bool_tree" type="checkbox">
-        <button type="submit">Khởi tạo tree</button>
-    </form>
-    <div id="treeList" style="display:none">
-        <h3>Danh sách cây đã tạo</h3>
-        <ul id="treesUl"></ul>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/pha-do/m-phado.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="#">
+              <!-- <img src="./asset/img/logo.png" alt="" class="logo_main"> -->
+            </a>
+          </li>
+          <li>
+            <a href="index.html">
+              <span class="icon"
+                ><i class="fa-solid fa-house sidebar_left--icon"></i
+              ></span>
+              <span class="title">Trang chủ</span>
+            </a>
+          </li>
+          <li>
+            <a href="phahe.html">
+              <span class="icon"><i class="fa-solid fa-users"></i></span>
+              <span class="title">Quản lí phả hệ</span>
+            </a>
+          </li>
+          <li>
+            <a href="phaky.html">
+              <span class="icon"
+                ><i class="fa-solid fa-book-bookmark"></i
+              ></span>
+              <span class="title">Quản lí phả ký</span>
+            </a>
+          </li>
+          <li>
+            <a href="phado.html">
+              <span class="icon"
+                ><i class="fa-solid fa-network-wired sidebar_left--icon"></i
+              ></span>
+              <span class="title">Quản lí phả đồ</span>
+            </a>
+          </li>
+          <li>
+            <a href="ngoaipha.html">
+              <span class="icon"
+                ><i class="fa-solid fa-book-open-reader"></i
+              ></span>
+              <span class="title">Ngoại phả</span>
+            </a>
+          </li>
+          <li>
+            <a href="phukhao.html">
+              <span class="icon"
+                ><i class="fa-solid fa-house-chimney"></i
+              ></span>
+              <span class="title">Phụ khảo</span>
+            </a>
+          </li>
+          <li>
+            <a href="hinhanh.html">
+              <span class="icon"><i class="fa-solid fa-images"></i></span>
+              <span class="title">Hình ảnh</span>
+            </a>
+          </li>
+          <li>
+            <a href="congduc.html">
+              <span class="icon"><i class="fa-solid fa-toolbox"></i></span>
+              <span class="title">Công đức</span>
+            </a>
+          </li>
+          <li>
+            <a href="login.html">
+              <span class="icon"
+                ><i class="fa-solid fa-right-to-bracket"></i
+              ></span>
+              <span class="title">Đăng xuất tài khoản</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <script type="module">
-        import {
-            db,
-            collection,
-            doc,
-            setDoc,
-            getDocs,
-            serverTimestamp
-        } from "../js/firebase/firebase-config.js";
-        import {
-            getAuth,
-            signInWithEmailAndPassword,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    <!-- main -->
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="search">
+          <label for="">
+            <input type="text" placeholder="Tìm kiếm" />
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </label>
+        </div>
+        <div class="user">
+          <img
+            src="data:image/jpeg;base64,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"
+          />
+        </div>
+      </div>
 
-        const auth = getAuth();
+      <div class="main_content">
+        <hr />
+        <!-- Nút dấu cộng -->
+        <button
+          id="openCreateTreeModal"
+          class="icon-btn"
+          type="button"
+          title="Thêm dòng họ"
+        >
+          <span style="font-size: 28px; font-weight: bold">＋</span>
+        </button>
 
-        document.getElementById("loginForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const email = document.getElementById("login_email").value.trim();
-            const password = document.getElementById("login_password").value;
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                alert("Đăng nhập thành công!");
-            } catch (error) {
-                alert("Đăng nhập thất bại: " + error.message);
-            }
-        });
+        <!-- Modal tạo tree -->
+        <div id="createTreeModal" class="modal">
+          <span class="close-modal" id="closeCreateTreeModal">&times;</span>
+          <form id="createTreeForm">
+            <label>Tên dòng họ</label>
+            <input id="name_tree" type="text" />
+            <label>Mô tả</label>
+            <input id="descrip_tree" type="text" />
+            <label>Trạng thái</label>
+            <input id="bool_tree" type="checkbox" />
+            <button type="submit">Tạo dòng họ</button>
+          </form>
+        </div>
 
-        // Kiểm tra trạng thái đăng nhập để ẩn/hiện form
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById("loginForm").style.display = "none";
-                document.getElementById("createTreeForm").style.display = "block";
-                document.getElementById("treeList").style.display = "block";
-                loadTrees();
-            } else {
-                document.getElementById("loginForm").style.display = "block";
-                document.getElementById("createTreeForm").style.display = "none";
-                document.getElementById("treeList").style.display = "none";
-            }
-        });
+        <div id="treeList">
+          <h3>Danh sách cây đã tạo</h3>
+          <table class="tree-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên cây</th>
+                <th>ID</th>
+                <th>Mô tả</th>
+                <th>Trạng thái</th>
+                <th>Quản lý</th>
+              </tr>
+            </thead>
+            <tbody id="treesTableBody">
+              <!-- JS sẽ render từng dòng ở đây -->
+              <tr>
+                <td>1</td>
+                <td>Họ Nguyễn</td>
+                <td>abc123</td>
+                <td>Miêu tả...</td>
+                <td>Public</td>
+                <td>
+                  <div class="tree-actions">
+                    <button title="Thêm member">
+                      <i class="fa fa-user-plus"></i>
+                    </button>
+                    <button title="Thêm event">
+                      <i class="fa fa-calendar-plus"></i>
+                    </button>
+                    <button title="Thêm permission">
+                      <i class="fa fa-key"></i>
+                    </button>
+                    <button title="Xem members">
+                      <i class="fa fa-users"></i>
+                    </button>
+                    <button title="Xoá" class="delete-tree-btn">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-        document.getElementById("createTreeForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const name = document.getElementById("name_tree").value.trim();
-            const description = document.getElementById("descrip_tree").value.trim();
-            const isPublic = document.getElementById("bool_tree").checked;
-            await createTree({ name, description, isPublic });
-            await loadTrees();
-        });
+    <div id="customModal" class="modal">
+      <span class="close-modal" id="closeCustomModal">&times;</span>
+      <form id="customModalForm"></form>
+    </div>
 
-        async function createTree({ name, description, isPublic }) {
-            try {
-                const treesRef = collection(db, "trees");
-                const treeDocRef = doc(treesRef); // random id
-                const accessCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-                await setDoc(treeDocRef, {
-                    name,
-                    description,
-                    isPublic,
-                    accessCode,
-                    createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
-                });
-                alert("Tạo cây thành công! ID: " + treeDocRef.id);
-                return treeDocRef.id;
-            } catch (error) {
-                alert("Lỗi tạo cây phả hệ: " + error.message);
-                return null;
-            }
-        }
-
-        // Hiển thị danh sách các tree đã tạo
-        async function loadTrees() {
-            const treesUl = document.getElementById("treesUl");
-            treesUl.innerHTML = "Đang tải...";
-            try {
-                const treesRef = collection(db, "trees");
-                const snapshot = await getDocs(treesRef);
-                treesUl.innerHTML = "";
-                snapshot.forEach(docSnap => {
-                    const li = document.createElement("li");
-                    li.textContent = `${docSnap.data().name} (ID: ${docSnap.id})`;
-                    // Thêm nút để tạo member, event, permission cho tree này
-                    const btnMember = document.createElement("button");
-                    btnMember.textContent = "Thêm member";
-                    btnMember.onclick = () => addMember(docSnap.id);
-                    const btnEvent = document.createElement("button");
-                    btnEvent.textContent = "Thêm event";
-                    btnEvent.onclick = () => addEvent(docSnap.id);
-                    const btnPermission = document.createElement("button");
-                    btnPermission.textContent = "Thêm permission";
-                    btnPermission.onclick = () => addPermission(docSnap.id);
-                    // Thêm nút xem members
-                    const btnShowMembers = document.createElement("button");
-                    btnShowMembers.textContent = "Xem members";
-                    btnShowMembers.onclick = () => showMembers(docSnap.id);
-                    li.appendChild(btnMember);
-                    li.appendChild(btnEvent);
-                    li.appendChild(btnPermission);
-                    li.appendChild(btnShowMembers);
-                    treesUl.appendChild(li);
-                });
-            } catch (error) {
-                treesUl.innerHTML = "Lỗi tải cây: " + error.message;
-            }
-        }
-
-        // Function tạo member cho tree
-        async function addMember(treeId) {
-            const memberId = crypto.randomUUID();
-            const memberData = {
-                userId: auth.currentUser.uid,
-                fullname: prompt("Tên thành viên?"),
-                gender: prompt("Giới tính? (male/female)"),
-                dateOfBirth: prompt("Ngày sinh?"),
-                dateOfDeath: prompt("Ngày mất? (bỏ trống nếu còn sống)"),
-                photoUrl: prompt("Link ảnh? (bỏ trống nếu không có)"),
-                createdAt: serverTimestamp(),
-                updatedAt: serverTimestamp()
-            };
-            const memberRef = doc(collection(db, `trees/${treeId}/members`), memberId);
-            await setDoc(memberRef, memberData);
-            alert("Đã thêm member cho tree " + treeId);
-        }
-
-        // Function tạo event cho tree
-        async function addEvent(treeId) {
-            const eventId = crypto.randomUUID();
-            const eventData = {
-                name: prompt("Tên sự kiện?"),
-                date: prompt("Ngày diễn ra?"),
-                location: prompt("Địa điểm?"),
-                notification: prompt("Thông báo?"),
-                description: prompt("Mô tả?"),
-            };
-            const eventRef = doc(collection(db, `trees/${treeId}/events`), eventId);
-            await setDoc(eventRef, eventData);
-            alert("Đã thêm event cho tree " + treeId);
-        }
-
-        // Function tạo permission cho tree
-        async function addPermission(treeId) {
-            const userId = prompt("UserId cần cấp quyền?");
-            const permission = prompt("Quyền (owner/editor/viewer)?");
-            const permissionRef = doc(collection(db, `trees/${treeId}/permissions`), userId);
-            await setDoc(permissionRef, { permission });
-            alert("Đã thêm permission cho tree " + treeId);
-        }
-
-        // Hiển thị danh sách members cho tree
-        async function showMembers(treeId) {
-            // Xóa popup cũ nếu có
-            let oldPopup = document.getElementById("membersPopup");
-            if (oldPopup) oldPopup.remove();
-            const popup = document.createElement("div");
-            popup.id = "membersPopup";
-            popup.style.position = "fixed";
-            popup.style.top = "10%";
-            popup.style.left = "50%";
-            popup.style.transform = "translateX(-50%)";
-            popup.style.background = "#fff";
-            popup.style.border = "1px solid #ccc";
-            popup.style.padding = "20px";
-            popup.style.zIndex = 1000;
-            popup.innerHTML = `<h4>Danh sách members</h4><ul id='membersUl'></ul><button id='closeMembersPopup'>Đóng</button>`;
-            document.body.appendChild(popup);
-            document.getElementById("closeMembersPopup").onclick = () => popup.remove();
-            const membersUl = popup.querySelector("#membersUl");
-            membersUl.innerHTML = "Đang tải...";
-            try {
-                const membersRef = collection(db, `trees/${treeId}/members`);
-                const snapshot = await getDocs(membersRef);
-                membersUl.innerHTML = "";
-                snapshot.forEach(docSnap => {
-                    const li = document.createElement("li");
-                    li.textContent = `${docSnap.data().fullname} (ID: ${docSnap.id})`;
-                    // Nút tạo quan hệ
-                    const btnRel = document.createElement("button");
-                    btnRel.textContent = "Tạo quan hệ";
-                    btnRel.onclick = () => showRelationshipForm(treeId, docSnap.id, docSnap.data().fullname);
-                    li.appendChild(btnRel);
-                    membersUl.appendChild(li);
-                });
-            } catch (error) {
-                membersUl.innerHTML = "Lỗi tải members: " + error.message;
-            }
-        }
-
-        // Hiển thị form tạo quan hệ cho member
-        async function showRelationshipForm(treeId, memberId, memberName) {
-            // Xóa popup cũ nếu có
-            let oldPopup = document.getElementById("relationshipPopup");
-            if (oldPopup) oldPopup.remove();
-            const popup = document.createElement("div");
-            popup.id = "relationshipPopup";
-            popup.style.position = "fixed";
-            popup.style.top = "20%";
-            popup.style.left = "50%";
-            popup.style.transform = "translateX(-50%)";
-            popup.style.background = "#fff";
-            popup.style.border = "1px solid #ccc";
-            popup.style.padding = "20px";
-            popup.style.zIndex = 1001;
-            popup.innerHTML = `<h4>Tạo quan hệ cho ${memberName}</h4><form id='relForm'>
-                <label>Loại quan hệ</label>
-                <select id='relationNameSelect'></select><br>
-                <label>Chọn thành viên liên quan</label>
-                <select id='relativeIdSelect'></select><br>
-                <div id='marriageFields' style='display:none'>
-                    <label>Ngày kết hôn</label><input id='marriageDate' type='text'><br>
-                    <label>Tình trạng hôn nhân</label><input id='marriageStatus' type='text'><br>
-                </div>
-                <button type='submit'>Tạo quan hệ</button>
-                <button type='button' id='closeRelPopup'>Hủy</button>
-            </form>`;
-            document.body.appendChild(popup);
-            document.getElementById("closeRelPopup").onclick = () => popup.remove();
-            // Lấy các quan hệ đã có
-            const relRef = collection(db, `trees/${treeId}/members/${memberId}/relationships`);
-            const relSnap = await getDocs(relRef);
-            const usedRelations = [];
-            relSnap.forEach(doc => {
-                if (doc.data().relationName) usedRelations.push(doc.data().relationName);
-            });
-            // Các option quan hệ
-            const allRelations = ["cha", "mẹ", "vợ", "chồng"];
-            const availableRelations = allRelations.filter(r => !usedRelations.includes(r));
-            const relationSelect = document.getElementById("relationNameSelect");
-            relationSelect.innerHTML = availableRelations.map(r => `<option value='${r}'>${r}</option>`).join("");
-            // Lấy danh sách member khác
-            const membersRef = collection(db, `trees/${treeId}/members`);
-            const membersSnap = await getDocs(membersRef);
-            const relativeSelect = document.getElementById("relativeIdSelect");
-            relativeSelect.innerHTML = "";
-            membersSnap.forEach(doc => {
-                if (doc.id !== memberId) {
-                    relativeSelect.innerHTML += `<option value='${doc.id}'>${doc.data().fullname} (ID: ${doc.id})</option>`;
-                }
-            });
-            // Hiện/ẩn trường kết hôn
-            function updateMarriageFields() {
-                const val = relationSelect.value;
-                document.getElementById("marriageFields").style.display = (val === "vợ" || val === "chồng") ? "block" : "none";
-            }
-            relationSelect.onchange = updateMarriageFields;
-            updateMarriageFields();
-            // Submit form
-            document.getElementById("relForm").onsubmit = async function(e) {
-                e.preventDefault();
-                const relationName = relationSelect.value;
-                const relativeId = relativeSelect.value;
-                let marriageDate = null, marriageStatus = null;
-                if (relationName === "vợ" || relationName === "chồng") {
-                    marriageDate = document.getElementById("marriageDate").value;
-                    marriageStatus = document.getElementById("marriageStatus").value;
-                }
-                await addRelationship(treeId, memberId, {relativeId, relationName, marriageDate, marriageStatus});
-                alert("Đã tạo quan hệ!");
-                popup.remove();
-            };
-        }
-
-        // Sửa lại addRelationship để nhận data
-        async function addRelationship(treeId, memberId, data) {
-            const relationshipId = crypto.randomUUID();
-            const relationshipData = {
-                relativeId: data.relativeId,
-                relationName: data.relationName,
-                marriageDate: data.marriageDate || null,
-                marriageStatus: data.marriageStatus || null,
-            };
-            const relRef = doc(collection(db, `trees/${treeId}/members/${memberId}/relationships`), relationshipId);
-            await setDoc(relRef, relationshipData);
-        }
-    </script>
-</body>
+    <script type="module" src="./js/pha-do/m-phado.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
 </html>

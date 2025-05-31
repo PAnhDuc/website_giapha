@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/home/home.css" />
     <title>Trang Quản Lý</title>
     <link
       rel="stylesheet"
@@ -110,14 +111,33 @@
         <div class="user"></div>
       </div>
       <div class="main_content">
-        <div class="content_pk">
-          <div class="title-box">Trang chủ</div>
+        <div class="dashboard-stats">
+          <div class="stat-card stat-users">
+            <div class="stat-title">Tổng số User</div>
+            <div class="stat-value" id="userCount">0</div>
+            <div class="stat-desc">Tài khoản đã đăng ký</div>
+            <canvas id="userChart" height="80"></canvas>
+          </div>
+          <div class="stat-card stat-families">
+            <div class="stat-title">Tổng số Dòng họ</div>
+            <div class="stat-value" id="familyCount">0</div>
+            <div class="stat-desc">Dòng họ đã tạo</div>
+            <canvas id="familyChart" height="80"></canvas>
+          </div>
+          <div class="stat-card stat-online">
+            <div class="stat-title">Đang Online</div>
+            <div class="stat-value" id="onlineCount">0</div>
+            <div class="stat-desc">Người dùng đang hoạt động</div>
+            <canvas id="onlineChart" height="80"></canvas>
+          </div>
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/auth/auth.js"></script>
     <script src="./js/main.js"></script>
     <script type="module" src="./asset/js/login.js"></script>
+    <script type="module" src="./js/home/home.js"></script>
     <script>
       function handleLogout() {
         // Xóa tất cả dữ liệu liên quan đến người dùng khỏi localStorage
@@ -126,29 +146,6 @@
         localStorage.removeItem("userRole");
         localStorage.removeItem("userData");
         window.location.href = "index.html";
-      }
-    </script>
-    <script type="module">
-      import { renderUserAvatar } from "./asset/js/userInfo.js";
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // Kiểm tra trạng thái đăng nhập khi trang tải
-        if (!checkAuth() && window.location.pathname !== "/index.html") {
-          window.location.href = "index.html";
-          return;
-        }
-
-        // Hiển thị avatar người dùng nếu đã đăng nhập
-        renderUserAvatar();
-      });
-
-      function goToProfile() {
-        // Chuyển đến trang profile nếu đã đăng nhập
-        if (checkAuth()) {
-          window.location.href = "profile.html";
-        } else {
-          window.location.href = "index.html";
-        }
       }
     </script>
   </body>

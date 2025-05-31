@@ -1,0 +1,724 @@
+form {
+  background: #fff;
+  padding: 50px 30px;
+  margin: 32px auto 12px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  width: 45%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-align: justify;
+  color: #222;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border: 1px solid #bfc7d1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border: 1.5px solid #007bff;
+  outline: none;
+  background: #fff;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #007bff;
+}
+
+button {
+  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+button:hover {
+  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 32px 0;
+}
+
+/* Bảng danh sách cây */
+#treeList {
+  background: #fff;
+  padding: 32px 36px;
+  margin: 32px auto;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  max-width: 1100px;
+}
+
+#treeList h3 {
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  margin-top: 0;
+  color: #222;
+  letter-spacing: 0.5px;
+}
+
+.tree-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.tree-table th,
+.tree-table td {
+  padding: 18px 14px;
+  text-align: left;
+}
+
+.tree-table th {
+  background: #f5f7fa;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #222;
+  border-bottom: 2px solid #e3e8ef;
+}
+
+.tree-table tr {
+  border-bottom: 1px solid #e3e8ef;
+  transition: background 0.15s;
+}
+
+.tree-table tr:hover {
+  background: #f0f6ff;
+}
+
+.tree-table td {
+  font-size: 1rem;
+  color: #222;
+  vertical-align: middle;
+}
+
+.tree-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.tree-actions button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid #0090c5;
+  background: #fff;
+  color: #0090c5;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.tree-actions button:hover {
+  background: #0090c5;
+  color: #fff;
+  border: 1.5px solid #0090c5;
+}
+
+/* Nút dấu cộng nổi */
+.icon-btn {
+  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+.icon-btn:hover {
+  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1002;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  align-items: center;
+  justify-content: center;
+}
+#errorPopup {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  min-width: 320px;
+  max-width: 90vw;
+  background: transparent;
+  animation: fadeIn 0.2s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: 0;
+  }
+  to {
+    opacity: 1;
+    top: 32px;
+  }
+}
+.error-popup-content {
+  background: #fff;
+  border: 1.5px solid #ff4d4f;
+  color: #d32f2f;
+  border-radius: 8px;
+  padding: 18px 36px 16px 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  font-size: 1.08rem;
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.error-popup-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 22px;
+  color: #d32f2f;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.error-popup-close:hover {
+  color: #ff4d4f;
+}
+
+/* Popup thông báo chung */
+#notifyPopup {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  min-width: 320px;
+  max-width: 90vw;
+  background: transparent;
+  animation: fadeIn 0.2s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: 0;
+  }
+  to {
+    opacity: 1;
+    top: 32px;
+  }
+}
+.notify-popup-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px 36px 16px 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  font-size: 1.08rem;
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1.5px solid #43a047; /* mặc định xanh */
+  color: #388e3c;
+}
+.notify-popup-content.success {
+  border-color: #43a047;
+  color: #388e3c;
+}
+.notify-popup-content.error {
+  border-color: #ff4d4f;
+  color: #d32f2f;
+}
+.notify-popup-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 22px;
+  color: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.notify-popup-close:hover {
+  color: #222;
+}
+
+@media (max-width: 900px) {
+  #treeList {
+    padding: 12px 2vw;
+    max-width: 100vw;
+  }
+  .tree-table th,
+  .tree-table td {
+    padding: 10px 6px;
+    font-size: 0.97rem;
+  }
+}
+
+/* Modal nhập liệu */
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+  width: 100%;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group-full {
+  grid-column: 1 / -1;
+}
+#customModal .modal-title {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  color: #222;
+  letter-spacing: 0.5px;
+  display: block;
+}
+#customModal label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #222;
+}
+#customModal input[type="text"],
+#customModal input[type="email"],
+#customModal input[type="password"],
+#customModal input[type="date"],
+#customModal input[type="number"],
+#customModal input[type="url"],
+#customModal input[type="file"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  border: 1.2px solid #bfc7d1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 15px;
+  background: #f9fafb;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+#customModal input:focus {
+  border: 1.5px solid #007bff;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+}
+#customModal .img-preview {
+  display: block;
+  margin: 10px auto 0 auto;
+  max-width: 90px;
+  max-height: 90px;
+  border-radius: 7px;
+  object-fit: cover;
+  border: 1px solid #eee;
+  background: #fafbfc;
+}
+#customModal button[type="submit"] {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  font-size: 1.01rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+#customModal button[type="submit"]:hover {
+  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  #customModal .modal-content {
+    padding: 10px 2vw 10px 2vw;
+    max-width: 98vw;
+  }
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 10px 0;
+  }
+}
+.form-group.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.form-group.checkbox-group label {
+  margin-bottom: 0;
+  margin-right: 8px;
+}
+#createTreeForm label,
+#createTreeForm input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+#bool_tree {
+  margin-left: 8px;
+}
+
+/* Popup danh sách members */
+#membersPopup {
+  min-width: 350px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 28px 32px 20px 32px;
+  color: #222;
+  text-align: left;
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: fadeInPopup 0.2s;
+}
+
+@keyframes fadeInPopup {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+#membersPopup h4 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #1a73e8;
+  letter-spacing: 0.5px;
+}
+
+#membersUl {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 18px 0;
+}
+
+#membersUl li {
+  background: #f7fafd;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.2s;
+}
+
+#membersUl li:hover {
+  background: #e6f0fa;
+}
+
+#membersUl button,
+#relationshipPopup button,
+#closeMembersPopup,
+#closeRelPopup {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.18s;
+}
+
+#membersUl button:hover,
+#relationshipPopup button:hover,
+#closeMembersPopup:hover,
+#closeRelPopup:hover {
+  font-size: 15px;
+  margin-left: 20px;
+  padding: 5px 20px;
+  background: #1976d2;
+  color: #fff;
+}
+
+#closeMembersPopup,
+#closeRelPopup {
+  float: right;
+  font-size: 15px;
+  font-weight: bold;
+  background: none;
+  color: #888;
+  border: none;
+  margin: 0;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: color 0.18s;
+}
+
+#relationshipPopup form label {
+  font-weight: 500;
+  margin-top: 8px;
+  display: block;
+}
+
+#relationshipPopup select,
+#relationshipPopup input[type="text"] {
+  width: 98%;
+  padding: 6px 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #bfc9d1;
+  font-size: 1rem;
+  background: #fafdff;
+  transition: border 0.18s;
+}
+
+#relationshipPopup select:focus,
+#relationshipPopup input[type="text"]:focus {
+  border: 1.5px solid #1976d2;
+  outline: none;
+}
+
+#relationshipPopup button[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px 0;
+  font-size: 1.05rem;
+  background: linear-gradient(90deg, #1976d2 60%, #2196f3 100%);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+}
+
+#relationshipPopup button[type="submit"]:hover {
+  background: linear-gradient(90deg, #125ea7 60%, #1976d2 100%);
+}
+
+/* Đảm bảo popup có position: relative để nút đóng định vị đúng */
+#membersPopup {
+  position: relative;
+}
+
+/* Nút Đóng ở góc phải popup members */
+#membersPopup .close-members-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: linear-gradient(90deg, #ff5252 60%, #ffb347 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+  z-index: 10;
+}
+#membersPopup .close-members-btn:hover {
+  background: linear-gradient(90deg, #ff1744 60%, #ff9800 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(255, 82, 82, 0.18);
+}
+
+/* Nút tạo quan hệ nổi bật hơn */
+#membersPopup .btn-create-rel {
+  margin-left: 10px;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 22px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.13);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  outline: none;
+}
+#membersPopup .btn-create-rel:hover {
+  background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(67, 233, 123, 0.22);
+}
+
+/* Đảm bảo form modal có position: relative để định vị nút đóng */
+#customModalForm {
+  position: relative;
+}
+
+/* Nút đóng ở góc phải bên trong modal */
+#closeCustomModal {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 28px;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+  z-index: 2;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0;
+}
+#closeCustomModal:hover {
+  color: #007bff;
+}
+
+/* Tiêu đề modal căn giữa */
+#customModal .modal-title {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  color: #222;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+/* Popup tạo quan hệ */
+#relationshipPopup {
+  min-width: 340px;
+  max-width: 96vw;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 32px 32px 24px 32px;
+  color: #222;
+  text-align: left;
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  animation: fadeInPopup 0.2s;
+}
+#relationshipPopup h4 {
+  text-align: center;
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  color: #222;
+}
+#relationshipPopup .close-rel-popup {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-size: 28px;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+  z-index: 2;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0;
+}
+#relationshipPopup .close-rel-popup:hover {
+  color: #007bff;
+}
+
+/* Popup overlay */
+#membersPopup,
+#relationshipPopup {
+  font-family: "Segoe UI", Arial, sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(60, 60, 60, 0.18);
+  min-width: 340px;
+  max-width: 95vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: popupFadeIn 0.25s;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#membersPopup h4,
+#relationshipPopup h4 {
+  margin-top: 0;
+  font-size: 25px;
+  color: #1976d2;
+  letter-spacing: 0.5px;
+}
