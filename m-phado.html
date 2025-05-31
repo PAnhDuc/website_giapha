@@ -121,9 +121,14 @@
                     const btnPermission = document.createElement("button");
                     btnPermission.textContent = "Thêm permission";
                     btnPermission.onclick = () => addPermission(docSnap.id);
+                    // Thêm nút xem members
+                    const btnShowMembers = document.createElement("button");
+                    btnShowMembers.textContent = "Xem members";
+                    btnShowMembers.onclick = () => showMembers(docSnap.id);
                     li.appendChild(btnMember);
                     li.appendChild(btnEvent);
                     li.appendChild(btnPermission);
+                    li.appendChild(btnShowMembers);
                     treesUl.appendChild(li);
                 });
             } catch (error) {
@@ -173,18 +178,130 @@
             alert("Đã thêm permission cho tree " + treeId);
         }
 
-        // Function tạo relationship cho member
-        async function addRelationship(treeId, memberId) {
+        // Hiển thị danh sách members cho tree
+        async function showMembers(treeId) {
+            // Xóa popup cũ nếu có
+            let oldPopup = document.getElementById("membersPopup");
+            if (oldPopup) oldPopup.remove();
+            const popup = document.createElement("div");
+            popup.id = "membersPopup";
+            popup.style.position = "fixed";
+            popup.style.top = "10%";
+            popup.style.left = "50%";
+            popup.style.transform = "translateX(-50%)";
+            popup.style.background = "#fff";
+            popup.style.border = "1px solid #ccc";
+            popup.style.padding = "20px";
+            popup.style.zIndex = 1000;
+            popup.innerHTML = `<h4>Danh sách members</h4><ul id='membersUl'></ul><button id='closeMembersPopup'>Đóng</button>`;
+            document.body.appendChild(popup);
+            document.getElementById("closeMembersPopup").onclick = () => popup.remove();
+            const membersUl = popup.querySelector("#membersUl");
+            membersUl.innerHTML = "Đang tải...";
+            try {
+                const membersRef = collection(db, `trees/${treeId}/members`);
+                const snapshot = await getDocs(membersRef);
+                membersUl.innerHTML = "";
+                snapshot.forEach(docSnap => {
+                    const li = document.createElement("li");
+                    li.textContent = `${docSnap.data().fullname} (ID: ${docSnap.id})`;
+                    // Nút tạo quan hệ
+                    const btnRel = document.createElement("button");
+                    btnRel.textContent = "Tạo quan hệ";
+                    btnRel.onclick = () => showRelationshipForm(treeId, docSnap.id, docSnap.data().fullname);
+                    li.appendChild(btnRel);
+                    membersUl.appendChild(li);
+                });
+            } catch (error) {
+                membersUl.innerHTML = "Lỗi tải members: " + error.message;
+            }
+        }
+
+        // Hiển thị form tạo quan hệ cho member
+        async function showRelationshipForm(treeId, memberId, memberName) {
+            // Xóa popup cũ nếu có
+            let oldPopup = document.getElementById("relationshipPopup");
+            if (oldPopup) oldPopup.remove();
+            const popup = document.createElement("div");
+            popup.id = "relationshipPopup";
+            popup.style.position = "fixed";
+            popup.style.top = "20%";
+            popup.style.left = "50%";
+            popup.style.transform = "translateX(-50%)";
+            popup.style.background = "#fff";
+            popup.style.border = "1px solid #ccc";
+            popup.style.padding = "20px";
+            popup.style.zIndex = 1001;
+            popup.innerHTML = `<h4>Tạo quan hệ cho ${memberName}</h4><form id='relForm'>
+                <label>Loại quan hệ</label>
+                <select id='relationNameSelect'></select><br>
+                <label>Chọn thành viên liên quan</label>
+                <select id='relativeIdSelect'></select><br>
+                <div id='marriageFields' style='display:none'>
+                    <label>Ngày kết hôn</label><input id='marriageDate' type='text'><br>
+                    <label>Tình trạng hôn nhân</label><input id='marriageStatus' type='text'><br>
+                </div>
+                <button type='submit'>Tạo quan hệ</button>
+                <button type='button' id='closeRelPopup'>Hủy</button>
+            </form>`;
+            document.body.appendChild(popup);
+            document.getElementById("closeRelPopup").onclick = () => popup.remove();
+            // Lấy các quan hệ đã có
+            const relRef = collection(db, `trees/${treeId}/members/${memberId}/relationships`);
+            const relSnap = await getDocs(relRef);
+            const usedRelations = [];
+            relSnap.forEach(doc => {
+                if (doc.data().relationName) usedRelations.push(doc.data().relationName);
+            });
+            // Các option quan hệ
+            const allRelations = ["cha", "mẹ", "vợ", "chồng"];
+            const availableRelations = allRelations.filter(r => !usedRelations.includes(r));
+            const relationSelect = document.getElementById("relationNameSelect");
+            relationSelect.innerHTML = availableRelations.map(r => `<option value='${r}'>${r}</option>`).join("");
+            // Lấy danh sách member khác
+            const membersRef = collection(db, `trees/${treeId}/members`);
+            const membersSnap = await getDocs(membersRef);
+            const relativeSelect = document.getElementById("relativeIdSelect");
+            relativeSelect.innerHTML = "";
+            membersSnap.forEach(doc => {
+                if (doc.id !== memberId) {
+                    relativeSelect.innerHTML += `<option value='${doc.id}'>${doc.data().fullname} (ID: ${doc.id})</option>`;
+                }
+            });
+            // Hiện/ẩn trường kết hôn
+            function updateMarriageFields() {
+                const val = relationSelect.value;
+                document.getElementById("marriageFields").style.display = (val === "vợ" || val === "chồng") ? "block" : "none";
+            }
+            relationSelect.onchange = updateMarriageFields;
+            updateMarriageFields();
+            // Submit form
+            document.getElementById("relForm").onsubmit = async function(e) {
+                e.preventDefault();
+                const relationName = relationSelect.value;
+                const relativeId = relativeSelect.value;
+                let marriageDate = null, marriageStatus = null;
+                if (relationName === "vợ" || relationName === "chồng") {
+                    marriageDate = document.getElementById("marriageDate").value;
+                    marriageStatus = document.getElementById("marriageStatus").value;
+                }
+                await addRelationship(treeId, memberId, {relativeId, relationName, marriageDate, marriageStatus});
+                alert("Đã tạo quan hệ!");
+                popup.remove();
+            };
+        }
+
+        // Sửa lại addRelationship để nhận data
+        async function addRelationship(treeId, memberId, data) {
             const relationshipId = crypto.randomUUID();
             const relationshipData = {
-                relativeId: prompt("ID thành viên liên quan?"),
-                relationName: prompt("Quan hệ (cha, mẹ, vợ, chồng...)?"),
-                marriageDate: prompt("Ngày kết hôn? (bỏ trống nếu không có)"),
-                marriageStatus: prompt("Tình trạng hôn nhân? (đang kết hôn/ly hôn)"),
+                relativeId: data.relativeId,
+                relationName: data.relationName,
+                marriageDate: data.marriageDate || null,
+                marriageStatus: data.marriageStatus || null,
             };
             const relRef = doc(collection(db, `trees/${treeId}/members/${memberId}/relationships`), relationshipId);
             await setDoc(relRef, relationshipData);
-            alert("Đã thêm relationship cho member " + memberId);
         }
     </script>
 </body>
